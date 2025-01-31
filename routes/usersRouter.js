@@ -7,6 +7,7 @@ const {
     loginUser,
     updateUser,
     updatePassword,
+    updateProfilePicture,
 } = require('../controllers/usersController.js');
 
 const usersRouter = Router();
@@ -27,7 +28,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// usersRouter.post('/upload-profile-picture', upload.single('profile_picture'), updateProfilePicture);
-
+usersRouter.post('/upload-profile-picture', upload.single('profile_picture'), updateProfilePicture);
 
 module.exports = usersRouter;

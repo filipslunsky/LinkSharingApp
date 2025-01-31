@@ -13,11 +13,11 @@ app.use(express.json());
 
 app.use('/user', usersRouter);
 
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-// app.use('/uploads', (req, res, next) => {
-//     console.log(`Requesting file: ${req.url}`);
-//     next();
-// });
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', (req, res, next) => {
+    console.log(`Requesting file: ${req.url}`);
+    next();
+});
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {

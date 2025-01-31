@@ -78,9 +78,25 @@ const _updatePassword = async (email, hashedPassword) => {
     }
 };
 
+const _updateProfilePicture = async (email, profilePicturePath) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const userExists = await trx('users').where({ email }).first();
+            if (!userExists) {
+                throw new Error('User not found');
+            }
+            await trx('users').where({ email }).update({ profile_picture: profilePicturePath });
+        });
+    } catch (error) {
+        console.error("Error updating profile picture:", error);
+        throw error;
+    }
+};
+
 module.exports = {
     _registeUser,
     _loginUser,
     _updateUser,
     _updatePassword,
+    _updateProfilePicture,
 };

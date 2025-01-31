@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {
@@ -6,6 +7,7 @@ const {
     _loginUser,
     _updateUser,
     _updatePassword,
+    _updateProfilePicture,
 } = require('../models/usersModel.js');
 
 dotenv.config();
@@ -98,10 +100,36 @@ const updatePassword = async (req, res) => {
     }
 };
 
+const updateProfilePicture = async (req, res) => {
+    const { email } = req.body;
+    const file = req.file;
+
+    if (!file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const allowedExtensions = ['.jpg', '.jpeg', '.png'];
+    const fileExtension = path.extname(file.originalname).toLowerCase();
+
+    if (!allowedExtensions.includes(fileExtension)) {
+        return res.status(400).json({ error: 'Invalid file type. Only images are allowed.' });
+    }
+
+    try {
+        const profilePicturePath = `/uploads/${file.filename}`;
+        await _updateProfilePicture(email, profilePicturePath);
+        res.status(200).json({ message: 'Profile picture updated', profilePicture: profilePicturePath });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update profile picture' });
+    }
+};
+
 
 module.exports = {
     registeUser,
     loginUser,
     updateUser,
     updatePassword,
+    updateProfilePicture,
 };

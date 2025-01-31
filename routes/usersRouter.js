@@ -28,6 +28,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-usersRouter.post('/upload-profile-picture', upload.single('profile_picture'), updateProfilePicture);
+usersRouter.post('/upload-profile-picture', upload.single('profile_picture'), authenticateLoginToken, updateProfilePicture);
 
 module.exports = usersRouter;

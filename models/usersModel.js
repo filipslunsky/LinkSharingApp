@@ -1,0 +1,47 @@
+const { db } = require('../config/db.js');
+
+const _registeUser = async (firstName, lastName, email, hashedPassword) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const userExists = await trx('users')
+                .where({ email })
+                .first();
+            if (userExists) {
+                return { success: false, message: 'User already exists' };
+            }
+            await trx('users').insert({
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: hashedPassword
+            });
+            return { success: true, message: 'user successfully created' };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error adding user: ${error.message}` };
+    }
+};
+
+const _loginUser = async (email) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const userExists = await trx('users')
+                .where({ email })
+                .first();
+            if (!userExists) {
+                return { success: false, password: null, message: 'User does not exist' };
+            }
+            const user = await trx('users').select('first_name','last_name', 'email', 'password', 'user_id', 'profile_picture', 'hash_id').where({ email }).first();
+            return { success: true, firstName: user.first_name, lastName: user.last_name, email: user.email, password: user.password, userId: user.user_id, profilePicture: user.profile_picture, hashId: user.hash_id };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error checking password: ${error.message}` };
+    }
+};
+
+module.exports = {
+    _registeUser,
+    _loginUser,
+};

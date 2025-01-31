@@ -93,10 +93,29 @@ const _updateProfilePicture = async (email, profilePicturePath) => {
     }
 };
 
+const _deleteUser = async (email) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const userExists = await trx('users')
+                .where({ email })
+                .first();
+            if (!userExists) {
+                return { success: false, message: 'User does not exist' };
+            }
+            await trx('users').where({email}).delete();
+            return { success: true, message: 'User successfully deleted' };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error deleting user: ${error.message}` };
+    }
+};
+
 module.exports = {
     _registeUser,
     _loginUser,
     _updateUser,
     _updatePassword,
     _updateProfilePicture,
+    _deleteUser,
 };

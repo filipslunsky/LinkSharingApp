@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const {
     _registeUser,
     _loginUser,
+    _updateUser,
+    _updatePassword,
 } = require('../models/usersModel.js');
 
 dotenv.config();
@@ -50,7 +52,56 @@ const loginUser = async (req, res) => {
     }
 };
 
+const updateUser = async (req, res) => {
+    const { firstName, lastName, email } = req.body;
+    try {
+        const data = await _updateUser(firstName, lastName, email);
+        if (data.success) {
+            res.status(200).json(data);
+        } else {
+            res.status(400).json(data);
+        };
+    } catch (error) {
+        console.log('Error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const updatePassword = async (req, res) => {
+    const { email, newPassword, oldPassword } = req.body;
+    try {
+        const data1 = await _loginUser(email);
+        if (data1.success) {
+            const match = await bcrypt.compare(oldPassword, data1.password);
+            if (match) {
+                try {
+                    const hashedPassword = await bcrypt.hash(newPassword, 10);
+                    const data2 = await _updatePassword(email, hashedPassword);
+                    if (data2.success) {
+                        res.status(200).json(data2);
+                    } else {
+                        res.status(400).json(data2);
+                    };
+                } catch (error) {
+                    console.log('Error:', error);
+                    res.status(500).json({ message: 'Internal server error' });
+                }    
+            } else {
+                res.json({success: false, passwordMatch: false})
+            }
+        } else {
+            res.status(400).json(data1);
+        };
+    } catch (error) {
+        console.log('Error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
 module.exports = {
     registeUser,
     loginUser,
+    updateUser,
+    updatePassword,
 };

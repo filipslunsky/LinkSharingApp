@@ -41,7 +41,46 @@ const _loginUser = async (email) => {
     }
 };
 
+const _updateUser = async (firstName, lastName, email) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const userExists = await trx('users')
+                .where({ email })
+                .first();
+            if (!userExists) {
+                return { success: false, message: 'User does not exist' };
+            }
+
+            const user = await trx('users').update({first_name: firstName, last_name: lastName}).where({ email });
+            return { success: true, firstName, lastName};
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error updating user: ${error.message}` };
+    }
+};
+
+const _updatePassword = async (email, hashedPassword) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const userExists = await trx('users')
+                .where({ email })
+                .first();
+            if (!userExists) {
+                return { success: false, message: 'User does not exist' };
+            }
+            const user = await trx('users').update({password: hashedPassword}).where({ email });
+            return { success: true, message: 'password updated successfully'};
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error updating password: ${error.message}` };
+    }
+};
+
 module.exports = {
     _registeUser,
     _loginUser,
+    _updateUser,
+    _updatePassword,
 };

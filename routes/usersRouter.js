@@ -5,12 +5,16 @@ const { authenticateLoginToken } = require('../middlewares/authenticate.js');
 const {
     registeUser,
     loginUser,
+    updateUser,
+    updatePassword,
 } = require('../controllers/usersController.js');
 
 const usersRouter = Router();
 
 usersRouter.post('/register', registeUser);
 usersRouter.post('/login', loginUser);
+usersRouter.put('/', authenticateLoginToken, updateUser);
+usersRouter.put('/password', authenticateLoginToken, updatePassword);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

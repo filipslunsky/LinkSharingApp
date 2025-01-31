@@ -12,15 +12,35 @@ const authenticateLoginToken = (req, res, next) => {
     if (token == null) {
         return res.status(401).json({ message: 'No token, authorization denied' });
     }
-    
-    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) {
-            console.log('Token verification error:', err);
-            return res.status(403).json({ message: 'Token is not valid' });
+
+    try {
+        const decodedToken = jwt.decode(token);
+
+        if (!decodedToken || !decodedToken.email) {
+            return res.status(403).json({ message: 'Invalid token structure' });
         }
-        req.user = user;
+
+        const emailFromToken = decodedToken.email;
+        const emailFromRequest = req.body.email;
+
+        if (emailFromToken !== emailFromRequest) {
+            return res.status(403).json({ message: 'Token does not belong to the user' });
+        }
+
+        jwt.verify(token, ACCESS_TOKEN_SECRET, (err) => {
+            if (err) {
+                console.log('Token verification error:', err);
+                return res.status(403).json({ message: 'Token is not valid' });
+            }
+        });
+
+        req.user = decodedToken;
+
         next();
-    });
+    } catch (err) {
+        console.log('Error decoding token:', err);
+        return res.status(403).json({ message: 'Token decoding failed' });
+    }
 };
 
 module.exports = {

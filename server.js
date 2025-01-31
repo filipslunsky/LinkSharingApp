@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 
 const usersRouter = require('./routes/usersRouter.js');
+const linksRouter = require('./routes/linksRouter.js');
 
 const PORT = 3001;
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', usersRouter);
+app.use('/links', linksRouter);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', (req, res, next) => {

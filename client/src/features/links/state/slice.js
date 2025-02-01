@@ -12,6 +12,7 @@ const initialState = {
     editOrderStatus: '',
     linksMessage: '',
     error: null,
+    currentLinks: [],
 };
 
 const getHeaders = () => {

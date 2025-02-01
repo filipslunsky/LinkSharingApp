@@ -12,8 +12,6 @@ const EditUser = () => {
     const editPasswordStatus = useSelector(state => state.user.editPasswordStatus);
     const editPictureStatus = useSelector(state => state.user.editPictureStatus);
 
-    console.log(user);
-
     const [editPassword, setEditPassword] = useState(false);
     const [passwordMatch, setPasswordMatch] = useState(false);
     const [profilePicture, setProfilePicture] = useState(null);
@@ -65,9 +63,17 @@ const EditUser = () => {
         }
     };
 
-    const handleLogout = () => {};
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        navigate('/');
+    };
     
-    const handleDelete = () => {};
+    const handleDelete = () => {
+        const email = user.email;
+        dispatch(deleteUser({email}));
+        dispatch(logoutUser());
+        navigate('/');
+    };
 
     return (
         <>
@@ -123,6 +129,26 @@ const EditUser = () => {
                 </div>
                 <div className="userEditButtonContainer">
                     <button className="userEditSaveButton" onClick={handleSave}>Save</button>
+                    {!logout && <button className="editUserLogoutButton" onClick={() => {setLogout(true)}}>Logout</button> }
+                    {
+                    logout
+                    &&
+                    <div className="leaveContainer">
+                        <span className="editUserConfirmQuestion">Are you sure you want to log out?</span>
+                        <button className="editUserConfirmYes" onClick={handleLogout}>Yes</button>
+                        <button className="editUserConfirmNo" onClick={() => {setLogout(false)}}>No</button>
+                    </div>
+                    }
+                    {!deleteAccount && <button className="editUserDeleteButton" onClick={() => {setDeleteAccount(true)}}>Delete Account</button> }
+                    {
+                    deleteAccount
+                    &&
+                    <div className="leaveContainer">
+                        <span className="editUserConfirmQuestion">You are about to delete your account, this action is not reversible. Are you sure you want to proceed?</span>
+                        <button className="editUserConfirmYes" onClick={handleDelete}>Yes</button>
+                        <button className="editUserConfirmNo" onClick={() => {setDeleteAccount(false)}}>No</button>
+                    </div>
+                    }
                 </div>
             </div>
         </>

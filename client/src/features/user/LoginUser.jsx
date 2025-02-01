@@ -17,7 +17,7 @@ const LoginUser = () => {
 
     useEffect(() => {
         if (loggedIn) {
-            navigate('/chat');
+            navigate('/');
         }
     }, [loggedIn, navigate]);
 
@@ -34,6 +34,7 @@ const LoginUser = () => {
             email: emailRef.current.value,
             password: passwordRef.current.value
         };
+
         dispatch(loginUser(userInfo));
     };
 

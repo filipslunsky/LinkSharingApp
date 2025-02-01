@@ -60,7 +60,43 @@ const _updateLink = async (linkId, url, title) => {
     }
 };
 
-const _updateLinksOrder = async () => {};
+const _updateLinksOrder = async (links) => {
+    return await db.transaction(async (trx) => {
+        try {
+            const resultArr = [];
+
+            const linkIds = links.map(link => link.linkId);
+            const existingLinks = await trx('links').whereIn('link_id', linkIds).select('link_id');
+
+            const existingLinkIds = existingLinks.map(link => link.link_id);
+            const missingLinks = linkIds.filter(id => !existingLinkIds.includes(id));
+
+            if (missingLinks.length > 0) {
+                return {
+                    success: false,
+                    resultArr: missingLinks.map(id => ({
+                        success: false,
+                        message: `Link ${id} does not exist`,
+                    }))
+                };
+            }
+
+            for (const link of links) {
+                await trx('links')
+                    .update({ display_order: link.displayOrder })
+                    .where({ link_id: link.linkId });
+
+                resultArr.push({ success: true, message: `Link ${link.linkId} order successfully updated` });
+            }
+
+            return { success: true, resultArr };
+        } catch (error) {
+            console.error('Transaction error:', error);
+            return { success: false, message: `Error updating links: ${error.message}` };
+        }
+    });
+};
+
 
 const _deleteLink = async (linkId) => {
     try {

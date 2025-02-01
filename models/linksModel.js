@@ -1,6 +1,23 @@
 const { db } = require('../config/db.js');
 
-const _getAllLinks = async () => {};
+const _getAllLinks = async (email) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const user = await trx('users').where({ email }).first();
+            if (!user) {
+                return { success: false, message: 'User not found' };
+            }
+            const links = await trx('links')
+            .select('link_id', 'user_id', 'url', 'title', 'display_order')
+            .where({user_id: user.user_id});
+
+            return { success: true, links };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { succes: false, message: `Error getting links: ${error}`};
+    }
+};
 
 const _addLink = async (email, url, title, displayOrder) => {
     try {

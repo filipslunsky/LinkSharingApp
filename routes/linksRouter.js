@@ -10,6 +10,7 @@ const {
 
 const linksRouter = Router();
 
+linksRouter.post('/all', authenticateLoginToken, getAllLinks);
 linksRouter.post('/new', authenticateLoginToken, addLink);
 
 module.exports = linksRouter;

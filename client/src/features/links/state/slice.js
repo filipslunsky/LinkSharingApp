@@ -107,5 +107,5 @@ const linksSlice = createSlice({
 });
 
 
-// export const {  } = linksSlice.actions;
+export const { addNewLink, updateLink, updateLinksOrder, deleteLink } = linksSlice.actions;
 export default linksSlice.reducer;

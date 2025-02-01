@@ -62,7 +62,23 @@ const _updateLink = async (linkId, url, title) => {
 
 const _updateLinksOrder = async () => {};
 
-const _deleteLink = async () => {};
+const _deleteLink = async (linkId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const linkExists = await trx('links')
+                .where({ link_id: linkId })
+                .first();
+            if (!linkExists) {
+                return { success: false, message: 'Link does not exist' };
+            }
+            await trx('links').where({ link_id: linkId }).delete();
+            return { success: true, message: 'Link successfully deleted' };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error deleting link: ${error.message}` };
+    }
+};
 
 module.exports = {
     _getAllLinks,

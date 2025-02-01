@@ -150,6 +150,9 @@ const userSlice = createSlice({
             localStorage.removeItem('user');
             localStorage.removeItem('token');
         },
+        resetRegisterStatus: (state) => {
+            state.registerStatus = '';
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -174,7 +177,7 @@ const userSlice = createSlice({
             .addCase(registerUser.pending, (state) => {
                 state.registerStatus = 'loading';
             })
-            .addCase(registerUser.rejected, (state) => {
+            .addCase(registerUser.rejected, (state, action) => {
                 state.registerStatus = 'failed';
                 state.logMessage = action.error.message;
             })
@@ -224,5 +227,5 @@ const userSlice = createSlice({
     },
 });
 
-export const { logoutUser } = userSlice.actions;
+export const { logoutUser, resetRegisterStatus } = userSlice.actions;
 export default userSlice.reducer;

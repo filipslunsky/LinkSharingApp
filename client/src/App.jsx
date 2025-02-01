@@ -6,6 +6,7 @@ import Home from './features/general/Home';
 import RegisterUser from './features/user/RegisterUser';
 import LoginUser from './features/user/LoginUser';
 import EditUser from './features/user/EditUser';
+import LinkList from './features/links/LinkList';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/user/login' element={<LoginUser />} />
           <Route element={<ProtectedRoute />}>
             <Route path='/user' element={<EditUser />} />
+            <Route path='/links' element={<LinkList />} />
           </Route>
         </Routes>
       </BrowserRouter>

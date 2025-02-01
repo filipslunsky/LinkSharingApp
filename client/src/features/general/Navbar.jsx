@@ -10,7 +10,7 @@ const Navbar = () => {
                     <Logo />
                 </div>
                 <div className="navbarCentercontainer">
-                    <Link>Links</Link>
+                    <Link to={'/links'}>Links</Link>
                     <Link to={'/user'}>Profile Details</Link>
                 </div>
                 <div className="navbarRightcontainer">

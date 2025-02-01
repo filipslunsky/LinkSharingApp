@@ -33,7 +33,7 @@ const _addLink = async (email, url, title, displayOrder) => {
                 display_order: displayOrder,
             }).returning('link_id', 'user_id', 'url', 'title', 'display_order');
 
-            return { succes: true, message: 'link successfully added' };
+            return { success: true, message: 'link successfully added' };
         });
     } catch (error) {
         console.error('Transaction error:', error);

@@ -36,7 +36,8 @@ export const getLinks = createAsyncThunk('links/getLinks', async (_, { rejectWit
             { email: user.email },
             { headers }
         );
-        return response.data.chats;
+        
+        return response.data.links;
     } catch (error) {
         return rejectWithValue(error.response?.data?.message || error.message);
     }

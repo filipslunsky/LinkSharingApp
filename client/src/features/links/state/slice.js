@@ -6,13 +6,10 @@ const LINKS_URL = `${import.meta.env.VITE_API_URL}/links`;
 const initialState = {
     links: [],
     linksStatus: '',
-    editLinkStatus: '',
-    newLinkStatus: '',
-    deleteLinkStatus: '',
-    editOrderStatus: '',
+    currentLinks: [],
+    updateLinksStatus,
     linksMessage: '',
     error: null,
-    currentLinks: [],
 };
 
 const getHeaders = () => {
@@ -32,7 +29,7 @@ export const getLinks = createAsyncThunk('links/getLinks', async (_, { rejectWit
             throw new Error('User not found in local storage.');
         }
 
-        const response = await axios.post(
+        const response = await axios.put(
             `${LINKS_URL}/all`,
             { email: user.email },
             { headers }
@@ -44,11 +41,40 @@ export const getLinks = createAsyncThunk('links/getLinks', async (_, { rejectWit
     }
 });
 
+export const updateLinks = createAsyncThunk('links/updateLinks', async (linksArr, { rejectWithValue }) => {
+    try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const headers = getHeaders();
+
+        if (!user || !user.email) {
+            throw new Error('User not found in local storage.');
+        }
+
+        const response = await axios.post(
+            `${LINKS_URL}/all`,
+            {
+                email: user.email,
+                links: linksArr,
+            },
+            { headers }
+        );
+
+        return response.data.links;
+
+    } catch (error) {
+        return rejectWithValue(error.response?.data?.message || error.message);
+    }
+});
 
 const linksSlice = createSlice({
     name: 'links',
     initialState,
-    reducers: {},
+    reducers: {
+        addNewLink: () => {},
+        updateLink: () => {},
+        updateLinksOrder: () => {},
+        deleteLink: () => {},
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getLinks.pending, (state) => {
@@ -61,6 +87,19 @@ const linksSlice = createSlice({
             })
             .addCase(getLinks.fulfilled, (state, action) => {
                 state.linksStatus = 'success';
+                state.links = action.payload;
+                state.error = null;
+            })
+            .addCase(updateLinks.pending, (state) => {
+                state.updateLinksStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(updateLinks.rejected, (state, action) => {
+                state.updateLinksStatus = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(updateLinks.fulfilled, (state, action) => {
+                state.updateLinksStatus = 'success';
                 state.links = action.payload;
                 state.error = null;
             })

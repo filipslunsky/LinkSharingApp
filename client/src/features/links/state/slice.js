@@ -7,7 +7,7 @@ const initialState = {
     links: [],
     linksStatus: '',
     currentLinks: [],
-    updateLinksStatus,
+    updateLinksStatus: '',
     linksMessage: '',
     error: null,
 };
@@ -29,7 +29,7 @@ export const getLinks = createAsyncThunk('links/getLinks', async (_, { rejectWit
             throw new Error('User not found in local storage.');
         }
 
-        const response = await axios.put(
+        const response = await axios.post(
             `${LINKS_URL}/all`,
             { email: user.email },
             { headers }
@@ -50,7 +50,7 @@ export const updateLinks = createAsyncThunk('links/updateLinks', async (linksArr
             throw new Error('User not found in local storage.');
         }
 
-        const response = await axios.post(
+        const response = await axios.put(
             `${LINKS_URL}/all`,
             {
                 email: user.email,

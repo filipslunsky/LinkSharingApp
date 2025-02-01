@@ -1,0 +1,14 @@
+import appLogoLarge from '../../assets/img/logo-devlinks-large.svg';
+import appLogoSmall from '../../assets/img/logo-devlinks-small.svg';
+
+const Logo = () => {
+    return (
+        <>
+            <div className="logoMainContainer">
+                <img className='logoImageLarge' src={appLogoLarge} alt='app logo' />
+            </div>
+        </>
+    );
+}
+ 
+export default Logo;

@@ -1,7 +1,22 @@
+import { Link } from "react-router-dom";
+import Logo from "./Logo";
+import './navbar.css';
+
 const Navbar = () => {
     return (
         <>
-            <h2>Navbar</h2>
+            <div className="navbarMainContainer">
+                <div className="navbarLeftcontainer">
+                    <Logo />
+                </div>
+                <div className="navbarCentercontainer">
+                    <Link>Links</Link>
+                    <Link to={'/user'}>Profile Details</Link>
+                </div>
+                <div className="navbarRightcontainer">
+                    <Link>Preview</Link>
+                </div>
+            </div>
         </>
     );
 }

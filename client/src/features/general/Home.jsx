@@ -7,12 +7,12 @@ const Home = () => {
 
     const loggedIn = useSelector(state => state.user.loggedIn);
 
-    // useEffect(() => {
-    //     if (loggedIn) {
-    //         navigate('/');
-    //         return;
-    //     };
-    // }, [])
+    useEffect(() => {
+        if (loggedIn) {
+            navigate('/user');
+            return;
+        };
+    }, [])
 
 
     return (

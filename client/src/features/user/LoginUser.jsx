@@ -8,24 +8,16 @@ const LoginUser = () => {
     const navigate = useNavigate();
 
     const loggedIn = useSelector(state => state.user.loggedIn);
-    const logMessage = useSelector(state => state.user.logMessage);
-
-    const [error, setError] = useState(null);
 
     const emailRef = useRef();
     const passwordRef = useRef();
 
     useEffect(() => {
         if (loggedIn) {
-            navigate('/');
+            navigate('/user');
         }
     }, [loggedIn, navigate]);
 
-    useEffect(() => {
-        if (logMessage) {
-            setError(null);
-        }
-    }, [logMessage]);
 
     const handleLogin = () => {
         if (emailRef.current.value.length === 0 || passwordRef.current.value.length === 0) return;
@@ -68,7 +60,6 @@ const LoginUser = () => {
                     <button className='userConfirmButton' onClick={handleLogin}>Login</button>
                     <button className="userCancelButton" onClick={handleCancel}>Cancel</button>
                 </div>
-                {logMessage && <p style={{ color: 'red' }}>{logMessage}</p>}
                 <div className="userStatusContainer">
                     <p className='userStatusMessage'>You don't have an account yet?</p>
                     <Link to='/user/register' className='formLink'>Create a New Account</Link>

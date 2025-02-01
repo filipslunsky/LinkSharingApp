@@ -32,8 +32,8 @@ const _loginUser = async (email) => {
             if (!userExists) {
                 return { success: false, password: null, message: 'User does not exist' };
             }
-            const user = await trx('users').select('first_name','last_name', 'email', 'password', 'user_id', 'profile_picture', 'hash_id').where({ email }).first();
-            return { success: true, firstName: user.first_name, lastName: user.last_name, email: user.email, password: user.password, userId: user.user_id, profilePicture: user.profile_picture, hashId: user.hash_id };
+            const user = await trx('users').select('first_name','last_name', 'email', 'password', 'user_id', 'profile_picture', 'hash_id', 'public_email').where({ email }).first();
+            return { success: true, firstName: user.first_name, lastName: user.last_name, email: user.email, password: user.password, userId: user.user_id, profilePicture: user.profile_picture, hashId: user.hash_id, publicEmail: user.public_email };
         });
     } catch (error) {
         console.error('Transaction error:', error);
@@ -41,7 +41,7 @@ const _loginUser = async (email) => {
     }
 };
 
-const _updateUser = async (firstName, lastName, email) => {
+const _updateUser = async (firstName, lastName, email, publicEmail) => {
     try {
         return await db.transaction(async (trx) => {
             const userExists = await trx('users')
@@ -51,8 +51,8 @@ const _updateUser = async (firstName, lastName, email) => {
                 return { success: false, message: 'User does not exist' };
             }
 
-            const user = await trx('users').update({first_name: firstName, last_name: lastName}).where({ email });
-            return { success: true, firstName, lastName};
+            const user = await trx('users').update({first_name: firstName, last_name: lastName, public_email: publicEmail}).where({ email });
+            return { success: true, firstName, lastName, publicEmail};
         });
     } catch (error) {
         console.error('Transaction error:', error);

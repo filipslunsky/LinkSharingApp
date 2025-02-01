@@ -42,7 +42,7 @@ const loginUser = async (req, res) => {
                     ACCESS_TOKEN_SECRET,
                     { expiresIn: '1d' }
                 );
-                res.json({success: true, passwordMatch: true, firstName: data.firstName, lastName: data.lastName, email: data.email, userId: data.userId, hashId: data.hashId, profilePicture: data.profilePicture, token});
+                res.json({success: true, passwordMatch: true, firstName: data.firstName, lastName: data.lastName, email: data.email, userId: data.userId, hashId: data.hashId, publicEmail: data.publicEmail, profilePicture: data.profilePicture, token});
             } else {
                 res.json({success: true, passwordMatch: false})
             }
@@ -56,9 +56,9 @@ const loginUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, publicEmail } = req.body;
     try {
-        const data = await _updateUser(firstName, lastName, email);
+        const data = await _updateUser(firstName, lastName, email, publicEmail);
         if (data.success) {
             res.status(200).json(data);
         } else {

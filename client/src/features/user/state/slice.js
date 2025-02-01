@@ -10,6 +10,7 @@ const initialState = {
         email: '',
         userId: null,
         hashId: '',
+        publicEmail: '',
         profilePicture: '',
     },
     token: null,
@@ -55,12 +56,12 @@ export const loginUser = createAsyncThunk(
         try {
             const response = await axios.post(`${USER_URL}/login`, credentials);
 
-            const { success, passwordMatch, firstName, lastName, email, userId, hashId, profilePicture, token } = response.data;
+            const { success, passwordMatch, firstName, lastName, email, userId, hashId, publicEmail, profilePicture, token } = response.data;
 
             if (success && passwordMatch) {
-                localStorage.setItem('user', JSON.stringify({ firstName, lastName, email, userId, profilePicture, hashId }));
+                localStorage.setItem('user', JSON.stringify({ firstName, lastName, email, userId, profilePicture, hashId, publicEmail }));
                 localStorage.setItem('token', token);
-                return { firstName, lastName, email, userId, profilePicture, hashId, token, logMessage: 'Logged in successfully' };
+                return { firstName, lastName, email, userId, profilePicture, hashId, publicEmail, token, logMessage: 'Logged in successfully' };
             } else if (success && !passwordMatch) {
                 throw new Error('Wrong password');
             } else {
@@ -163,6 +164,7 @@ const userSlice = createSlice({
                     email: action.payload.email,
                     userId: action.payload.userId,
                     hashId: action.payload.hashId,
+                    publicEmail: action.payload.publicEmail,
                     profilePicture: action.payload.profilePicture,
                 };
                 state.token = action.payload.token;
@@ -196,7 +198,7 @@ const userSlice = createSlice({
                 state.user = {
                     firstName: action.payload.firstName || state.user.firstName,
                     lastName: action.payload.lastName || state.user.lastName,
-                    email: state.user.email,
+                    publicEmail: state.user.publicEmail,
                 };
             })
             .addCase(editUserPassword.pending, (state) => {

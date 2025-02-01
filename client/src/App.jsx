@@ -5,6 +5,7 @@ import ProtectedRoute from './features/general/ProtectedRoute';
 import Home from './features/general/Home';
 import RegisterUser from './features/user/RegisterUser';
 import LoginUser from './features/user/LoginUser';
+import EditUser from './features/user/EditUser';
 import './App.css';
 
 function App() {
@@ -19,8 +20,7 @@ function App() {
           <Route path='/user/register' element={<RegisterUser />} />
           <Route path='/user/login' element={<LoginUser />} />
           <Route element={<ProtectedRoute />}>
-            {/* <Route path='/user/info' element={<User />} />
-            <Route path='/user/edit' element={<UserEdit />} /> */}
+            <Route path='/user' element={<EditUser />} />
           </Route>
         </Routes>
       </BrowserRouter>

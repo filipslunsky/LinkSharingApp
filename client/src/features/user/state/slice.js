@@ -27,8 +27,17 @@ const loadUserFromLocalStorage = () => {
         const storedUser = localStorage.getItem('user');
         const storedToken = localStorage.getItem('token');
         if (storedUser && storedToken) {
+            const parsedUser = JSON.parse(storedUser);
             return {
-                user: JSON.parse(storedUser),
+                user: {
+                    firstName: parsedUser.firstName || '',
+                    lastName: parsedUser.lastName || '',
+                    email: parsedUser.email || '',
+                    userId: parsedUser.userId || null,
+                    hashId: parsedUser.hashId || '',
+                    publicEmail: parsedUser.publicEmail || '',
+                    profilePicture: parsedUser.profilePicture || '',
+                },
                 loggedIn: true,
                 token: storedToken,
                 logMessage: 'Logged in successfully',
@@ -116,9 +125,11 @@ export const editUserPassword = createAsyncThunk('user/editUserPassword', async 
 export const uploadProfilePicture = createAsyncThunk(
     'user/uploadProfilePicture',
     async (formData, thunkAPI) => {
+        const token = localStorage.getItem('token');
         try {
             const response = await axios.post(`${USER_URL}/upload-profile-picture`, formData, {
                 headers: {
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
                 },
             });
@@ -196,10 +207,18 @@ const userSlice = createSlice({
             .addCase(editUserInfo.fulfilled, (state, action) => {
                 state.editInfoStatus = 'success';
                 state.user = {
+                    ...state.user,
                     firstName: action.payload.firstName || state.user.firstName,
                     lastName: action.payload.lastName || state.user.lastName,
-                    publicEmail: state.user.publicEmail,
+                    publicEmail: action.payload.publicEmail,
                 };
+                const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+                localStorage.setItem('user', JSON.stringify({
+                    ...storedUser,
+                    firstName: state.user.firstName,
+                    lastName: state.user.lastName,
+                    publicEmail: state.user.publicEmail,
+                }));
             })
             .addCase(editUserPassword.pending, (state) => {
                 state.editPasswordStatus = 'loading';

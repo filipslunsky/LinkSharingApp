@@ -12,5 +12,8 @@ const linksRouter = Router();
 
 linksRouter.post('/all', authenticateLoginToken, getAllLinks);
 linksRouter.post('/new', authenticateLoginToken, addLink);
+linksRouter.put('/', authenticateLoginToken, updateLink);
+linksRouter.put('/all', authenticateLoginToken, updateLinksOrder);
+linksRouter.post('/delete', authenticateLoginToken, deleteLink);
 
 module.exports = linksRouter;

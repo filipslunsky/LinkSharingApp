@@ -41,7 +41,24 @@ const _addLink = async (email, url, title, displayOrder) => {
     }
 };
 
-const _updateLink = async () => {};
+const _updateLink = async (linkId, url, title) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const linkExists = await trx('links').where({ link_id: linkId }).first();
+            if (!linkExists) {
+                return { success: false, message: 'Link not found' };
+            }
+            const link = await trx('links')
+            .update({ url, title})
+            .where({link_id: linkId});
+
+            return { success: true, message: 'Link successfully updated', linkId, url, title };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { succes: false, message: `Error updating link: ${error}`};
+    }
+};
 
 const _updateLinksOrder = async () => {};
 

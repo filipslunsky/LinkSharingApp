@@ -14,7 +14,7 @@ const LoginUser = () => {
 
     useEffect(() => {
         if (loggedIn) {
-            navigate('/user');
+            navigate('/links');
         }
     }, [loggedIn, navigate]);
 

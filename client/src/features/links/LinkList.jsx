@@ -13,9 +13,9 @@ const LinkList = () => {
         dispatch(getLinks());
     }, []);
 
-    // useEffect(() => {
-    //     console.log(links);
-    // }, [links]);
+    useEffect(() => {
+        console.log(links);
+    }, [links]);
 
     if (linksStatus === 'loading') {
         return (

@@ -53,7 +53,7 @@ export const updateLinks = createAsyncThunk('links/updateLinks', async (linksArr
             `${LINKS_URL}/all`,
             {
                 email: user.email,
-                links: linksArr,
+                links: linksArr.links,
             },
             { headers }
         );
@@ -69,10 +69,21 @@ const linksSlice = createSlice({
     name: 'links',
     initialState,
     reducers: {
-        addNewLink: () => {},
-        updateLink: () => {},
-        updateLinksOrder: () => {},
-        deleteLink: () => {},
+        addNewLink: (state, action) => {
+            state.currentLinks.push(action.payload);
+        },
+        updateLink: (state, action) => {
+            state.currentLinks.splice(action.payload.index, 1, action.payload.updatedLink);
+        },
+        updateLinksOrder: (state, action) => {
+            state.currentLinks = action.payload;
+        },
+        deleteLink: (state, action) => {
+            state.currentLinks.splice(action.payload.index, 1);
+            for (let i = 0; i < state.currentLinks.length; i++) {
+                state.currentLinks.splice(i, 1, {...state.currentLinks[i], display_order: i + 1});
+            };
+        },
         resetCurrentLinks: (state) => {
             state.currentLinks = [...state.links];
         }
@@ -108,7 +119,7 @@ const linksSlice = createSlice({
                 state.updateLinksStatus = 'success';
                 state.links = action.payload;
                 state.error = null;
-                state.currentLinks = [...action.payload];
+                state.currentLinks = [];
             })
     },
 });

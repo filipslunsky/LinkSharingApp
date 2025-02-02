@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { getLinks } from './state/slice.js';
+import { getLinks, updateLinks, resetCurrentLinks } from './state/slice.js';
 import LinkItem from './LinkItem.jsx';
 
 const LinkList = () => {
     const dispatch = useDispatch();
 
-    const links = useSelector(state => state.links.links);
+    const links = useSelector(state => state.links.currentLinks);
     const linksStatus = useSelector(state => state.links.linksStatus);
+    const updateLinksStatus = useSelector(state => state.links.updateLinksStatus);
 
     useEffect(() => {
         dispatch(getLinks());
@@ -16,6 +17,14 @@ const LinkList = () => {
     useEffect(() => {
         console.log(links);
     }, [links]);
+
+    const handleSave = () => {
+        dispatch(updateLinks(links));
+    };
+
+    const handleCancel = () => {
+        dispatch(resetCurrentLinks());
+    };
 
     if (linksStatus === 'loading') {
         return (

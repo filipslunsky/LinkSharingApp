@@ -8,7 +8,6 @@ const initialState = {
     linksStatus: '',
     currentLinks: [],
     updateLinksStatus: '',
-    linksMessage: '',
     error: null,
 };
 
@@ -74,6 +73,9 @@ const linksSlice = createSlice({
         updateLink: () => {},
         updateLinksOrder: () => {},
         deleteLink: () => {},
+        resetCurrentLinks: (state) => {
+            state.currentLinks = [...state.links];
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -89,6 +91,10 @@ const linksSlice = createSlice({
                 state.linksStatus = 'success';
                 state.links = action.payload;
                 state.error = null;
+                if (state.currentLinks.length === 0) {
+                    state.currentLinks = [...action.payload];
+                }
+                state.error = null;
             })
             .addCase(updateLinks.pending, (state) => {
                 state.updateLinksStatus = 'loading';
@@ -102,10 +108,11 @@ const linksSlice = createSlice({
                 state.updateLinksStatus = 'success';
                 state.links = action.payload;
                 state.error = null;
+                state.currentLinks = [...action.payload];
             })
     },
 });
 
 
-export const { addNewLink, updateLink, updateLinksOrder, deleteLink } = linksSlice.actions;
+export const { addNewLink, updateLink, updateLinksOrder, deleteLink, resetCurrentLinks } = linksSlice.actions;
 export default linksSlice.reducer;

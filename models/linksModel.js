@@ -9,7 +9,8 @@ const _getAllLinks = async (email) => {
             }
             const links = await trx('links')
             .select('link_id', 'user_id', 'url', 'title', 'display_order')
-            .where({user_id: user.user_id});
+            .where({user_id: user.user_id})
+            .orderBy('display_order');
 
             return { success: true, links };
         });

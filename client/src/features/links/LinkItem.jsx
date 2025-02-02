@@ -20,6 +20,7 @@ const LinkItem = ({display_order, link_id, title, url}) => {
                             <option value="LinkedIn">LinkedIn</option>
                             <option value="GitHub">GitHub</option>
                             <option value="YouTube">YouTube</option>
+                            <option value="Portfolio Web">Portfolio Web</option>
                         </select>
                     </div>
                     <div className="linkItemInputContainer">

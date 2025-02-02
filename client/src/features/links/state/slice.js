@@ -77,6 +77,7 @@ const linksSlice = createSlice({
         },
         updateLinksOrder: (state, action) => {
             state.currentLinks = action.payload;
+            console.log("Updating links order with payload: ", action.payload);
         },
         deleteLink: (state, action) => {
             state.currentLinks.splice(action.payload.index, 1);

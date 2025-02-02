@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getLinks, updateLinks, resetCurrentLinks, addNewLink } from './state/slice.js';
 import LinkItem from './LinkItem.jsx';
@@ -45,7 +45,7 @@ const LinkList = () => {
     
     if (linksStatus === 'failed') {
         return (
-            <div className="statusMessage">Ooops, somethin went wrong, please try again later...</div>
+            <div className="statusMessage">Ooops, something went wrong, please try again later...</div>
         );
     };
     

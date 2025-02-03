@@ -41,6 +41,12 @@ export const getLinks = createAsyncThunk('links/getLinks', async (_, { rejectWit
 });
 
 export const updateLinks = createAsyncThunk('links/updateLinks', async (linksArr, { rejectWithValue }) => {
+    
+    const renumberedLinks = [];
+    for (let i = 0; i < linksArr.links.length; i++) {
+        renumberedLinks.push({...linksArr.links[i], display_order: i + 1});
+    };
+
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         const headers = getHeaders();
@@ -53,7 +59,7 @@ export const updateLinks = createAsyncThunk('links/updateLinks', async (linksArr
             `${LINKS_URL}/all`,
             {
                 email: user.email,
-                links: linksArr.links,
+                links: renumberedLinks,
             },
             { headers }
         );
@@ -77,7 +83,6 @@ const linksSlice = createSlice({
         },
         updateLinksOrder: (state, action) => {
             state.currentLinks = action.payload;
-            console.log("Updating links order with payload: ", action.payload);
         },
         deleteLink: (state, action) => {
             state.currentLinks.splice(action.payload.index, 1);

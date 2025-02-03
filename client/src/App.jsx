@@ -7,7 +7,6 @@ import RegisterUser from './features/user/RegisterUser';
 import LoginUser from './features/user/LoginUser';
 import EditUser from './features/user/EditUser';
 import LinkList from './features/links/LinkList';
-import Test from './features/links/Test';
 import './App.css';
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      {/* <Test /> */}
     </>
   )
 }

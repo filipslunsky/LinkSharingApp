@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useSortable } from "@dnd-kit/sortable";
 import dragNDropIcon from '../../assets/img/icon-drag-and-drop.svg';
 import { updateLink, deleteLink } from './state/slice.js';
 
@@ -9,6 +10,8 @@ const LinkItem = ({display_order, title, url, index}) => {
 
     const urlRef = useRef();
     const platformRef = useRef();
+
+    const { attributes, listeners, setNodeRef } = useSortable({ id: display_order });
 
     const handleUpdateLink = () => {
         const updatedLink = {
@@ -25,7 +28,7 @@ const LinkItem = ({display_order, title, url, index}) => {
 
     return (
         <>
-            <div className="linkItemMainContainer">
+            <div className="linkItemMainContainer" ref={setNodeRef} {...attributes} {...listeners}>
                 <div className="linkItemHeaderContainer">
                     <div className="linkItemHeaderLeftContainer">
                         <img className='linkItemDragNDropImage' src={dragNDropIcon} alt="drag and drop" />

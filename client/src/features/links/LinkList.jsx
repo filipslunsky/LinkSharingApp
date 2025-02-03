@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { getLinks, updateLinks, resetCurrentLinks, addNewLink } from './state/slice.js';
+import { getLinks, updateLinks, resetCurrentLinks, addNewLink, updateLinksOrder } from './state/slice.js';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import LinkItem from './LinkItem.jsx';
 
 const LinkList = () => {
@@ -11,12 +13,14 @@ const LinkList = () => {
     const user = useSelector(state => state.user.user);
     const updateLinksStatus = useSelector(state => state.links.updateLinksStatus);
 
+    const [orderedLinks, setOrderedLinks] = useState([]);
+
     useEffect(() => {
         dispatch(getLinks());
     }, [updateLinksStatus]);
 
     useEffect(() => {
-        console.log(links);
+        setOrderedLinks([...links]);
     }, [links]);
 
     const handleAddNew = () => {
@@ -35,6 +39,18 @@ const LinkList = () => {
 
     const handleCancel = () => {
         dispatch(resetCurrentLinks());
+    };
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (!over || active.id === over.id) return;
+
+        const oldIndex = orderedLinks.findIndex((link) => link.display_order === active.id);
+        const newIndex = orderedLinks.findIndex((link) => link.display_order === over.id);
+        const newOrder = arrayMove(orderedLinks, oldIndex, newIndex);
+
+        dispatch(updateLinksOrder(newOrder));
+        setOrderedLinks([...newOrder]);
     };
 
     if (linksStatus === 'loading') {
@@ -57,21 +73,22 @@ const LinkList = () => {
                     <p className="linkListDescription">Add/edit/remove links below and then share all your profiles with the world!</p>
                     <button className="linkListAddButton" onClick={handleAddNew}>+ Add new link</button>
                 </div>
-                <div className="linkListItemsContainter">
-                    {
-                        links.map((item, index) => {
-                            return (
+                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={orderedLinks.map(link => link.display_order)} strategy={verticalListSortingStrategy}>
+                        <div className="linkListItemsContainer">
+                            {orderedLinks.map((item, index) => (
                                 <LinkItem
-                                key={index}
-                                display_order={item.display_order}
-                                url={item.url}
-                                title={item.title}
-                                index={index}
+                                    key={item.display_order}
+                                    id={item.display_order}
+                                    display_order={item.display_order}
+                                    url={item.url}
+                                    title={item.title}
+                                    index={index}
                                 />
-                            )
-                        })
-                    }
-                </div>
+                            ))}
+                        </div>
+                    </SortableContext>
+                </DndContext>
                 <div className="linkListControlsContainer">
                     <button className="linkListCancelButton" onClick={handleCancel}>Cancel</button>
                     <button className="linkListSaveButton" onClick={handleSave}>Save</button>

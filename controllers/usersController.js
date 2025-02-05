@@ -9,6 +9,7 @@ const {
     _updatePassword,
     _updateProfilePicture,
     _deleteUser,
+    _getUserByHashId
 } = require('../models/usersModel.js');
 
 dotenv.config();
@@ -141,6 +142,21 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const getUserByHashId = async (req, res) => {
+    const { hashId } = req.params;
+    try {
+        const data = await _getUserByHashId(hashId);
+        if (data.success) {
+            res.status(200).json(data);
+        } else {
+            res.status(400).json(data);
+        };
+    } catch (error) {
+        console.log('Error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 module.exports = {
     registeUser,
     loginUser,
@@ -148,4 +164,5 @@ module.exports = {
     updatePassword,
     updateProfilePicture,
     deleteUser,
+    getUserByHashId,
 };

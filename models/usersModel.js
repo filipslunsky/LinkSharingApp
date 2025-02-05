@@ -111,6 +111,36 @@ const _deleteUser = async (email) => {
     }
 };
 
+const _getUserByHashId = async (hashId) => {
+    try {
+        return await db.transaction(async (trx) => {
+            const user = await trx('users').where({ hash_id: hashId }).first();
+            if (!user) {
+                return { success: false, message: 'User not found' };
+            }
+            const userInfo = await trx('users')
+            .select(
+                'users.first_name',
+                'users.last_name',
+                'users.public_email',
+                'users.profile_picture',
+                'users.hash_id',
+                'links.url',
+                'links.title',
+                'links.display_order'
+            )
+            .join('links', 'users.user_id', 'links.user_id')
+            .where({'users.hash_id': hashId})
+            .orderBy('links.display_order', 'asc');
+
+            return { success: true, data: userInfo };
+        });
+    } catch (error) {
+        console.error('Transaction error:', error);
+        return { success: false, message: `Error getting links: ${error}`};
+    }
+};
+
 module.exports = {
     _registeUser,
     _loginUser,
@@ -118,4 +148,5 @@ module.exports = {
     _updatePassword,
     _updateProfilePicture,
     _deleteUser,
+    _getUserByHashId,
 };

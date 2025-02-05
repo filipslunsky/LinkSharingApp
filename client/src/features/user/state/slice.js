@@ -20,6 +20,17 @@ const initialState = {
     editInfoStatus: '',
     editPasswordStatus: '',
     editPictureStatus: '',
+    publicInfo: {
+        publicUser: {
+            firstName: '',
+            lastName: '',
+            publicEmail: '',
+            profilePicture: '',
+            hashId: '',
+        },
+        publicLinks: [],
+    },
+    publicInfoStatus: '',
 };
 
 const loadUserFromLocalStorage = () => {
@@ -150,6 +161,15 @@ export const deleteUser = createAsyncThunk('user/delete', async (deleteItem, { r
     }
 });
 
+export const getPublicInfo = createAsyncThunk('user/getPublicInfo', async (hashId, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`${USER_URL}/hashId`);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data || 'Public info not retrieved');
+    }
+});
+
 const userSlice = createSlice({
     name: 'user',
     initialState: loadUserFromLocalStorage(),
@@ -244,6 +264,16 @@ const userSlice = createSlice({
             .addCase(deleteUser.rejected, (state, action) => {
                 state.logMessage = action.payload || 'Failed to delete user';
                 console.error('Delete user failed:', action.payload);
+            })
+            .addCase(getPublicInfo.pending, (state) => {
+                state.publicInfoStatus = 'pending';
+            })
+            .addCase(getPublicInfo.fulfilled, (state, action) => {
+                
+            })
+            .addCase(getPublicInfo.rejected, (state, action) => {
+                state.publicInfoStatus = 'failed';
+                state.logMessage = action.payload || 'Failed to get public info';
             })
     },
 });

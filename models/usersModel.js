@@ -120,20 +120,24 @@ const _getUserByHashId = async (hashId) => {
             }
             const userInfo = await trx('users')
             .select(
-                'users.first_name',
-                'users.last_name',
-                'users.public_email',
-                'users.profile_picture',
-                'users.hash_id',
-                'links.url',
-                'links.title',
-                'links.display_order'
+                'first_name',
+                'last_name',
+                'public_email',
+                'profile_picture',
+                'hash_id',
+                'user_id',
             )
-            .join('links', 'users.user_id', 'links.user_id')
-            .where({'users.hash_id': hashId})
-            .orderBy('links.display_order', 'asc');
+            .where({'hash_id': hashId});
 
-            return { success: true, data: userInfo };
+            const links = await trx('links')
+            .select(
+                'url',
+                'title',
+                'display_order',
+            )
+            .where({'user_id': userInfo[0].user_id});
+
+            return { success: true, user: userInfo[0], links };
         });
     } catch (error) {
         console.error('Transaction error:', error);

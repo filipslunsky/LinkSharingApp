@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { act } from 'react';
 
 const USER_URL = `${import.meta.env.VITE_API_URL}/user`;
 
@@ -269,11 +270,18 @@ const userSlice = createSlice({
                 state.publicInfoStatus = 'pending';
             })
             .addCase(getPublicInfo.fulfilled, (state, action) => {
-                
+                state.publicInfoStatus = 'success';
+                state.publicInfo.publicUser = {
+                    firstName: action.payload.user.first_name,
+                    lastName: action.payload.user.last_name,
+                    publicEmai: action.payload.user.public_email,
+                    profilePicture: action.payload.user.profile_picture,
+                    hashId: action.payload.user.hash_id,
+                };
+                state.publicInfo.publicLinks = action.payload.links;
             })
-            .addCase(getPublicInfo.rejected, (state, action) => {
+            .addCase(getPublicInfo.rejected, (state) => {
                 state.publicInfoStatus = 'failed';
-                state.logMessage = action.payload || 'Failed to get public info';
             })
     },
 });

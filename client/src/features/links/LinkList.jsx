@@ -4,6 +4,7 @@ import { getLinks, updateLinks, resetCurrentLinks, addNewLink, updateLinksOrder 
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import LinkItem from './LinkItem.jsx';
+import MobileView from '../general/MobileView.jsx';
 
 const LinkList = () => {
     const dispatch = useDispatch();
@@ -67,31 +68,34 @@ const LinkList = () => {
     
     return (
         <>
-            <div className="linkListMainContainer">
-                <div className="linkListHeaderContainer">
-                    <h2 className="linkListHeader">Customize your links</h2>
-                    <p className="linkListDescription">Add/edit/remove links below and then share all your profiles with the world!</p>
-                    <button className="linkListAddButton" onClick={handleAddNew}>+ Add new link</button>
-                </div>
-                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                    <SortableContext items={orderedLinks.map(link => link.display_order)} strategy={verticalListSortingStrategy}>
-                        <div className="linkListItemsContainer">
-                            {orderedLinks.map((item, index) => (
-                                <LinkItem
-                                    key={item.display_order}
-                                    id={item.display_order}
-                                    display_order={item.display_order}
-                                    url={item.url}
-                                    title={item.title}
-                                    index={index}
-                                />
-                            ))}
-                        </div>
-                    </SortableContext>
-                </DndContext>
-                <div className="linkListControlsContainer">
-                    <button className="linkListCancelButton" onClick={handleCancel}>Cancel</button>
-                    <button className="linkListSaveButton" onClick={handleSave}>Save</button>
+            <div className="editLinksAndUserContainer">
+                <MobileView />
+                <div className="linkListMainContainer">
+                    <div className="linkListHeaderContainer">
+                        <h2 className="linkListHeader">Customize your links</h2>
+                        <p className="linkListDescription">Add/edit/remove links below and then share all your profiles with the world!</p>
+                        <button className="linkListAddButton" onClick={handleAddNew}>+ Add new link</button>
+                    </div>
+                    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={orderedLinks.map(link => link.display_order)} strategy={verticalListSortingStrategy}>
+                            <div className="linkListItemsContainer">
+                                {orderedLinks.map((item, index) => (
+                                    <LinkItem
+                                        key={item.display_order}
+                                        id={item.display_order}
+                                        display_order={item.display_order}
+                                        url={item.url}
+                                        title={item.title}
+                                        index={index}
+                                    />
+                                ))}
+                            </div>
+                        </SortableContext>
+                    </DndContext>
+                    <div className="linkListControlsContainer">
+                        <button className="linkListCancelButton" onClick={handleCancel}>Cancel</button>
+                        <button className="linkListSaveButton" onClick={handleSave}>Save</button>
+                    </div>
                 </div>
             </div>
         </>

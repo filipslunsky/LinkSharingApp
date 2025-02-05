@@ -7,15 +7,22 @@ const Preview = () => {
     const { hashId } = useParams();
     const dispatch = useDispatch();
 
-    const publicInfo = useSelector(state => state.user.publicInfo);
+    const publicUser = useSelector(state => state.user.publicUser);
+    const publicLinks = useSelector(state => state.user.publicLinks);
+    const publicInfoStatus = useSelector(state => state.user.publicInfoStatus);
 
     useEffect(() => {
         dispatch(getPublicInfo(hashId));
     }, []);
 
+    useEffect(() => {
+        console.log(publicUser);
+        console.log(publicLinks);
+    }, [publicInfoStatus]);
+
     return (
         <>
-            <h2>{hashId}</h2>
+            <h2>Preview</h2>
         </>
     );
 }

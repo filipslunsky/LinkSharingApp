@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Logo from "./Logo";
 import './navbar.css';
 
 const Navbar = () => {
     const location = useLocation();
+    const user = useSelector(state => state.user.user);
     
-    console.log(location.pathname);
+    // console.log(location.pathname);
     
     return (
         <>
@@ -19,7 +21,7 @@ const Navbar = () => {
                     <Link to={'/user'}>Profile Details</Link>
                 </div>
                 <div className="navbarRightcontainer">
-                    <Link>Preview</Link>
+                    <Link to={`/view/${user.hashId}`}>Preview</Link>
                 </div>
             </div>
         </>

@@ -21,16 +21,14 @@ const initialState = {
     editInfoStatus: '',
     editPasswordStatus: '',
     editPictureStatus: '',
-    publicInfo: {
-        publicUser: {
-            firstName: '',
-            lastName: '',
-            publicEmail: '',
-            profilePicture: '',
-            hashId: '',
+    publicUser: {
+        firstName: '',
+        lastName: '',
+        publicEmail: '',
+        profilePicture: '',
+        hashId: '',
         },
-        publicLinks: [],
-    },
+    publicLinks: [],
     publicInfoStatus: '',
 };
 
@@ -164,7 +162,7 @@ export const deleteUser = createAsyncThunk('user/delete', async (deleteItem, { r
 
 export const getPublicInfo = createAsyncThunk('user/getPublicInfo', async (hashId, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`${USER_URL}/hashId`);
+        const response = await axios.get(`${USER_URL}/${hashId}`);
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response?.data || 'Public info not retrieved');
@@ -271,14 +269,14 @@ const userSlice = createSlice({
             })
             .addCase(getPublicInfo.fulfilled, (state, action) => {
                 state.publicInfoStatus = 'success';
-                state.publicInfo.publicUser = {
+                state.publicUser = {
                     firstName: action.payload.user.first_name,
                     lastName: action.payload.user.last_name,
-                    publicEmai: action.payload.user.public_email,
+                    publicEmail: action.payload.user.public_email,
                     profilePicture: action.payload.user.profile_picture,
                     hashId: action.payload.user.hash_id,
                 };
-                state.publicInfo.publicLinks = action.payload.links;
+                state.publicLinks = action.payload.links;
             })
             .addCase(getPublicInfo.rejected, (state) => {
                 state.publicInfoStatus = 'failed';

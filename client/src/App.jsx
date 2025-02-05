@@ -7,6 +7,7 @@ import RegisterUser from './features/user/RegisterUser';
 import LoginUser from './features/user/LoginUser';
 import EditUser from './features/user/EditUser';
 import LinkList from './features/links/LinkList';
+import Preview from './features/links/Preview';
 import './App.css';
 
 function App() {
@@ -20,9 +21,11 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/user/register' element={<RegisterUser />} />
             <Route path='/user/login' element={<LoginUser />} />
+            <Route path='/share/:hashId' element={<Preview />} />
             <Route element={<ProtectedRoute />}>
               <Route path='/user' element={<EditUser />} />
               <Route path='/links' element={<LinkList />} />
+              <Route path='/view/:hashId' element={<Preview />} />
             </Route>
           </Routes>
         </BrowserRouter>

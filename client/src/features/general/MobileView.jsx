@@ -11,7 +11,7 @@ const MobileView = () => {
         <>
             <div className="mobileViewMainContainer">
                 <div className="mobileViewUserContainer">
-                    <img src={`${BASE_URL}${user.profilePicture}`} alt="user picture" className="mobileMenuProfilePicture" />
+                    <img src={`${BASE_URL}${user.profilePicture}`} alt="user picture" className="mobileViewProfilePicture" />
                     <p className="mobileViewUserName">{user.firstName} {user.lastName}</p>
                     <p className="mobileViewUserEmail">{user.publicEmail}</p>
                 </div>
@@ -22,7 +22,7 @@ const MobileView = () => {
                                 <div className="mobileViewLinkItem" key={item.display_order}>
                                     <img src="" alt="link icon" className="mobileViewLinkIcon" />
                                     <span className="mobileViewLinkItemName">{item.title}</span>
-                                    <a className="mobilViewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">
+                                    <a className="mobileViewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">
                                         <img src={nextIcon} alt="link icon" className="mobileViewNextIcon" />
                                     </a>
                                 </div>

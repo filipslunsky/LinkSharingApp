@@ -6,6 +6,7 @@ const Logo = () => {
         <>
             <div className="logoMainContainer">
                 <img className='logoImageLarge' src={appLogoLarge} alt='app logo' />
+                <img className='logoImageSmall' src={appLogoSmall} alt='app logo' />
             </div>
         </>
     );

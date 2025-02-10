@@ -184,6 +184,15 @@ const userSlice = createSlice({
         resetRegisterStatus: (state) => {
             state.registerStatus = '';
         },
+        resetEditInfoStatus: (state) => {
+            state.editInfoStatus = '';
+        },
+        resetEditPasswordStatus: (state) => {
+            state.editPasswordStatus = '';
+        },
+        resetEditPictureStatus: (state) => {
+            state.editPictureStatus = '';
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -284,5 +293,5 @@ const userSlice = createSlice({
     },
 });
 
-export const { logoutUser, resetRegisterStatus } = userSlice.actions;
+export const { logoutUser, resetRegisterStatus, resetEditInfoStatus, resetEditPasswordStatus, resetEditPictureStatus } = userSlice.actions;
 export default userSlice.reducer;

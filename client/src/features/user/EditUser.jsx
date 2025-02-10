@@ -1,7 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { editUserInfo, editUserPassword, uploadProfilePicture, deleteUser, logoutUser } from "./state/slice";
+import { editUserInfo, editUserPassword, uploadProfilePicture, deleteUser, logoutUser, resetEditInfoStatus, resetEditPictureStatus, resetEditPasswordStatus } from "./state/slice";
+import { setStatusMessage } from "../links/state/slice.js";
+import StatusMessage from "../links/StatusMessage.jsx";
 import MobileView from '../general/MobileView.jsx';
 
 const EditUser = () => {
@@ -12,6 +14,7 @@ const EditUser = () => {
     const editInfoStatus = useSelector(state => state.user.editInfoStatus);
     const editPasswordStatus = useSelector(state => state.user.editPasswordStatus);
     const editPictureStatus = useSelector(state => state.user.editPictureStatus);
+    const statusMessage = useSelector(state => state.links.statusMessage);
 
     const [editPassword, setEditPassword] = useState(false);
     const [passwordMatch, setPasswordMatch] = useState(false);
@@ -76,8 +79,47 @@ const EditUser = () => {
         navigate('/');
     };
 
+    useEffect(()=> {
+                if (editInfoStatus === 'success') {
+                    dispatch(setStatusMessage({ text: "User information saved successfully!", visible: true, style: 'success' }));
+                    setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                    dispatch(resetEditInfoStatus());
+                } else if (editInfoStatus === 'failed') {
+                    dispatch(setStatusMessage({ text: "Failed to save user information. Please try again.", visible: true, style: 'failed' }));
+                    setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                    dispatch(resetEditInfoStatus());
+                }
+            }, [editInfoStatus]);
+
+    useEffect(()=> {
+                if (editPasswordStatus === 'success') {
+                    dispatch(setStatusMessage({ text: "Password changed successfully!", visible: true, style: 'success' }));
+                    setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                    dispatch(resetEditPasswordStatus());
+                } else if (editPasswordStatus === 'failed') {
+                    dispatch(setStatusMessage({ text: "Failed to change password. Please try again.", visible: true, style: 'failed' }));
+                    setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                    dispatch(resetEditPasswordStatus());
+                }
+            }, [editPasswordStatus]);
+
+    useEffect(()=> {
+                if (editPictureStatus === 'success') {
+                    dispatch(setStatusMessage({ text: "New picture saved successfully!", visible: true, style: 'success' }));
+                    setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                    dispatch(resetEditPictureStatus());
+                } else if (editPictureStatus === 'failed') {
+                    dispatch(setStatusMessage({ text: "Failed to save new picture. Please try again.", visible: true, style: 'failed' }));
+                    setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                    dispatch(resetEditPictureStatus());
+                }
+            }, [editPictureStatus]);
+
+
+
     return (
         <>
+            {statusMessage.visible && <StatusMessage text={statusMessage.text} style={statusMessage.style} />}
             <div className="editLinksAndUserContainer">
                 <MobileView />
                 <div className="editUserMainContainer">

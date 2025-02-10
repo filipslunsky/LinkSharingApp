@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { getLinks, updateLinks, resetCurrentLinks, addNewLink, updateLinksOrder } from './state/slice.js';
+import { getLinks, updateLinks, resetCurrentLinks, addNewLink, updateLinksOrder, setStatusMessage, resetUpdateLinksStatus } from './state/slice.js';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import LinkItem from './LinkItem.jsx';
+import StatusMessage from './StatusMessage.jsx';
 import MobileView from '../general/MobileView.jsx';
 
 const LinkList = () => {
@@ -13,6 +14,7 @@ const LinkList = () => {
     const linksStatus = useSelector(state => state.links.linksStatus);
     const user = useSelector(state => state.user.user);
     const updateLinksStatus = useSelector(state => state.links.updateLinksStatus);
+    const statusMessage = useSelector(state => state.links.statusMessage);
 
     const [orderedLinks, setOrderedLinks] = useState([]);
 
@@ -54,6 +56,18 @@ const LinkList = () => {
         setOrderedLinks([...newOrder]);
     };
 
+    useEffect(()=> {
+            if (updateLinksStatus === 'success') {
+                dispatch(setStatusMessage({ text: "Links saved successfully!", visible: true, style: 'success' }));
+                setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                dispatch(resetUpdateLinksStatus());
+            } else if (updateLinksStatus === 'failed') {
+                dispatch(setStatusMessage({ text: "Failed to save links. Please try again.", visible: true, style: 'failed' }));
+                setTimeout(() => dispatch(setStatusMessage({ text: "", visible: false, style: '' })), 3000);
+                dispatch(resetUpdateLinksStatus());
+            }
+        }, [updateLinksStatus]);
+
     if (linksStatus === 'loading') {
         return (
             <div className="statusMessage">Loading...</div>
@@ -68,6 +82,7 @@ const LinkList = () => {
     
     return (
         <>
+            {statusMessage.visible && <StatusMessage text={statusMessage.text} style={statusMessage.style} />}
             <div className="editLinksAndUserContainer">
                 <MobileView />
                 <div className="linkListMainContainer">

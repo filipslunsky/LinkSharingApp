@@ -9,6 +9,11 @@ const initialState = {
     currentLinks: [],
     updateLinksStatus: '',
     error: null,
+    statusMessage: {
+        text: '',
+        style: '',
+        visible: false,
+    },
 };
 
 const getHeaders = () => {
@@ -92,7 +97,18 @@ const linksSlice = createSlice({
         },
         resetCurrentLinks: (state) => {
             state.currentLinks = [...state.links];
-        }
+        },
+        setStatusMessage: (state, action) => {
+            state.statusMessage = {
+                text: action.payload.text,
+                visible: action.payload.visible,
+                style: action.payload.style,
+            };
+        },
+        resetUpdateLinksStatus: (state) => {
+            state.updateLinksStatus = '';
+        },
+        
     },
     extraReducers: (builder) => {
         builder
@@ -131,5 +147,5 @@ const linksSlice = createSlice({
 });
 
 
-export const { addNewLink, updateLink, updateLinksOrder, deleteLink, resetCurrentLinks } = linksSlice.actions;
+export const { addNewLink, updateLink, updateLinksOrder, deleteLink, resetCurrentLinks, setStatusMessage, resetUpdateLinksStatus } = linksSlice.actions;
 export default linksSlice.reducer;

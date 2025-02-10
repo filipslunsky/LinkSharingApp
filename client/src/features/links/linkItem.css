@@ -1,0 +1,28 @@
+/* .linkItemInputField {
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 20px;
+    padding-left: 35px;
+    height: 40px;
+}
+
+.linkItemInputField[value="Facebook"] {
+    background-image: url('../../assets/img/icon-facebook.svg');
+}
+
+.linkItemInputField[value="LinkedIn"] {
+    background-image: url('../../assets/img/icon-linkedin.svg');
+}
+
+.linkItemInputField[value="GitHub"] {
+    background-image: url('../../assets/img/icon-github.svg');
+}
+
+.linkItemInputField[value="YouTube"] {
+    background-image: url('../../assets/img/icon-youtube.svg');
+}
+
+.linkItemInputField[value="PortfolioWeb"] {
+    background-image: url('../../assets/img/icon-profile-details-header.svg');
+} */

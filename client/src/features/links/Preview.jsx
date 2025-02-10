@@ -3,6 +3,20 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPublicInfo } from "../user/state/slice";
 import nextIcon from '../../assets/img/icon-arrow-right.svg';
+import CodePen from '../../assets/img/icon-codepen.svg';
+import CodeWars from '../../assets/img/icon-codewars.svg';
+import DevTo from '../../assets/img/icon-devto.svg';
+import Facebook from '../../assets/img/icon-facebook.svg';
+import FreeCodeMap from '../../assets/img/icon-freecodecamp.svg';
+import GitHub from '../../assets/img/icon-github.svg';
+import GitLab from '../../assets/img/icon-gitlab.svg';
+import HashNode from '../../assets/img/icon-hashnode.svg';
+import LinkedIn from '../../assets/img/icon-linkedin.svg';
+import StackOverflow from '../../assets/img/icon-stack-overflow.svg';
+import Twitch from '../../assets/img/icon-twitch.svg';
+import Twitter from '../../assets/img/icon-twitter.svg';
+import YouTube from '../../assets/img/icon-youtube.svg';
+import PortfolioWeb from '../../assets/img/icon-profile-details-header.svg';
 
 const Preview = () => {
     const BASE_URL = `${import.meta.env.VITE_API_URL}`;
@@ -12,6 +26,23 @@ const Preview = () => {
     const publicUser = useSelector(state => state.user.publicUser);
     const publicLinks = useSelector(state => state.user.publicLinks);
     const publicInfoStatus = useSelector(state => state.user.publicInfoStatus);
+
+    const icons = {
+        "CodePen": CodePen,
+        "CodeWars": CodeWars,
+        "DevTo": DevTo,
+        "Facebook": Facebook,
+        "FreeCodeCamp": FreeCodeMap,
+        "GitHub": GitHub,
+        "GitLab": GitLab,
+        "HashNode": HashNode,
+        "LinkedIn": LinkedIn,
+        "StackOverflow": StackOverflow,
+        "Twitch": Twitch,
+        "Twitter": Twitter,
+        "YouTube": YouTube,
+        "Portfolio": PortfolioWeb
+    };
 
     useEffect(() => {
         dispatch(getPublicInfo(hashId));
@@ -41,7 +72,7 @@ const Preview = () => {
                         publicLinks.map(item => {
                             return (
                                 <div className="previewLinkItem" key={item.display_order}>
-                                    <img src="" alt="link icon" className="previewLinkIcon" />
+                                    <img src={icons[item.title] || PortfolioWeb} alt="link icon" className="previewLinkIcon" />
                                     <span className="previewLinkItemName">{item.title}</span>
                                     <a className="previewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">
                                         <img src={nextIcon} alt="link icon" className="previewNextIcon" />

@@ -20,7 +20,6 @@ const MobileView = () => {
 
     const user = useSelector(state => state.user.user);
     const links = useSelector(state => state.links.currentLinks);
-    console.log(links);
     
     const icons = {
         "CodePen": CodePen,

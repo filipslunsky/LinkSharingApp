@@ -17,6 +17,7 @@ import Twitch from '../../assets/img/icon-twitch.svg';
 import Twitter from '../../assets/img/icon-twitter.svg';
 import YouTube from '../../assets/img/icon-youtube.svg';
 import PortfolioWeb from '../../assets/img/icon-profile-details-header.svg';
+import './linkItem.css';
 
 const LinkItem = ({display_order, title, url, index}) => {
     const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const LinkItem = ({display_order, title, url, index}) => {
                         onChange={handleUpdateLink}
                         >
                             <option value="">select platform</option>
-                            <option value="Facebook"><img src={Facebook} alt="icon" />Facebook</option>
+                            <option value="Facebook">Facebook</option>
                             <option value="LinkedIn">LinkedIn</option>
                             <option value="GitHub">GitHub</option>
                             <option value="YouTube">YouTube</option>

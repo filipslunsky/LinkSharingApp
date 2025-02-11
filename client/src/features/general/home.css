@@ -1,0 +1,32 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+}
+
+.homeTitle {
+    margin-top: 150px;
+    font-family: 'InstrumentSans-Bold';
+    font-size: 25px;
+}
+
+.homeText {
+    margin-top: 60px;
+    font-family: 'InstrumentSans-Regular';
+    font-size: 20px;
+    text-align: center;
+    padding: 0 100px;
+}
+
+.homeLink {
+    text-decoration: none;
+    font-family: 'InstrumentSans-SemiBold';
+    color: gray;
+    margin-top: 20px;
+}
+
+.homeLink:hover {
+    color: #633CFF;
+}

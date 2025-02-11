@@ -5,6 +5,7 @@ import { editUserInfo, editUserPassword, uploadProfilePicture, deleteUser, logou
 import { setStatusMessage } from "../links/state/slice.js";
 import StatusMessage from "../links/StatusMessage.jsx";
 import MobileView from '../general/MobileView.jsx';
+import './editUser.css';
 
 const EditUser = () => {
     const dispatch = useDispatch();

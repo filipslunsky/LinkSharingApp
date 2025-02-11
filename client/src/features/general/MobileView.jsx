@@ -14,6 +14,8 @@ import Twitch from '../../assets/img/icon-twitch.svg';
 import Twitter from '../../assets/img/icon-twitter.svg';
 import YouTube from '../../assets/img/icon-youtube.svg';
 import PortfolioWeb from '../../assets/img/icon-profile-details-header.svg';
+import mobileBackground from '../../assets/img/illustration-phone-mockup.svg';
+import './mobileView.css';
 
 const MobileView = () => {
     const BASE_URL = `${import.meta.env.VITE_API_URL}`;
@@ -41,6 +43,7 @@ const MobileView = () => {
     return (
         <>
             <div className="mobileViewMainContainer">
+                <img src={mobileBackground} alt="mobile background" className="mobileViewBackgroundImage" />
                 <div className="mobileViewUserContainer">
                     <img src={`${BASE_URL}${user.profilePicture}`} alt="user picture" className="mobileViewProfilePicture" />
                     <p className="mobileViewUserName">{user.firstName} {user.lastName}</p>
@@ -48,9 +51,9 @@ const MobileView = () => {
                 </div>
                 <div className="mobileViewLinksContainer">
                     {
-                        links.map(item => {
+                        links.slice(0, 5).map(item => {
                             return (
-                                <div className="mobileViewLinkItem" key={item.display_order}>
+                                <div className={`mobileViewLinkItem ${item.title}`} key={item.display_order}>
                                     <img src={icons[item.title] || PortfolioWeb} alt="link icon" className="mobileViewLinkIcon" />
                                     <span className="mobileViewLinkItemName">{item.title}</span>
                                     <a className="mobileViewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">

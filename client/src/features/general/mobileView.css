@@ -1,0 +1,111 @@
+.mobileViewMainContainer {
+    height: 98%;
+    width: 40%;
+    margin: 0 1%;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.mobileViewBackgroundImage {
+    position: absolute;
+    width: 280px;
+    top: 25px;
+    left: 80px;
+}
+
+.mobileViewUserContainer {
+    position: absolute;
+    top: 83px;
+    left: 145px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+} 
+
+.mobileViewProfilePicture {
+    max-width: 87px;
+    max-height: 87px;
+    border-radius: 45px;
+}
+
+.mobileViewUserName {
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.mobileViewUserEmail {
+    font-size: 8px;
+    margin-top: 9px;
+}
+
+.mobileViewLinksContainer {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 278px;
+    left: 111px;
+}
+
+.mobileViewLinkItem {
+    width: 216px;
+    height: 40px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.mobileViewLinkIcon {
+    margin-left: 10px;
+}
+
+.mobileViewLinkItemName {
+    margin-left: 15px;
+    color: white;
+    font-family: 'InstrumentSans-SemiBold';
+    display: inline-block;
+    width: 145px;
+}
+
+.mobileViewNextIcon {
+    margin-top: 3px;
+}
+
+.LinkedIn {
+    background-color: rgb(0, 157, 255);
+}
+
+.YouTube {
+    background-color: red;
+}
+
+.GitHub {
+    background-color: black;
+}
+
+.Facebook {
+    background-color: blue;
+}
+
+.PortfolioWeb {
+    background-color: gray;
+}
+
+/* tablet size devices*/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .mobileViewMainContainer {
+        display: none;
+    }
+}
+
+/* mobile size devices*/
+@media (max-width: 767px) {
+    .mobileViewMainContainer {
+        display: none;
+    }
+}

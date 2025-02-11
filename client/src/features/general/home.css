@@ -6,8 +6,12 @@
     height: 100vh;
 }
 
+.homeLogo {
+    margin-top: 80px;
+}
+
 .homeTitle {
-    margin-top: 150px;
+    margin-top: 50px;
     font-family: 'InstrumentSans-Bold';
     font-size: 25px;
 }

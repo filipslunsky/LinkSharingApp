@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser, resetRegisterStatus } from './state/slice.js';
+import logoImage from '../../assets/img/logo-devlinks-large.svg';
+import './userForm.css';
 
 const RegisterUser = () => {
     const dispatch = useDispatch();
@@ -61,11 +63,12 @@ const RegisterUser = () => {
                     <p className='userStatusMessage'>
                         Congratulations, you have successfully registered, you may now proceed to log in.
                     </p>
-                    <Link to={'/user/login'}>Login</Link>
+                    <Link className='formLink' to={'/user/login'}>Login</Link>
                 </div>
                 :
                 <div className="userFormContainer">
-                <h2 className="userFormName">Register New User</h2>
+                    <img src={logoImage} alt="logo" className="userFormLogoImage" />
+                    <h2 className="userFormName">Register New User</h2>
                 <div className="userInputContainer">
                     <input
                     type="text"

@@ -2,6 +2,8 @@ import { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from './state/slice.js';
+import logoImage from '../../assets/img/logo-devlinks-large.svg';
+import './userForm.css';
 
 const LoginUser = () => {
     const dispatch = useDispatch();
@@ -37,6 +39,7 @@ const LoginUser = () => {
     return (
         <>
             <div className="userFormContainer">
+                <img src={logoImage} alt="logo" className="userFormLogoImage" />
                 <h2 className="userFormName">Log In</h2>
                 <div className="userInputContainer">
                     <input

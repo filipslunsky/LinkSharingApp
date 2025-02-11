@@ -84,7 +84,7 @@ const LinkList = () => {
     return (
         <>
             {statusMessage.visible && <StatusMessage text={statusMessage.text} style={statusMessage.style} />}
-            <div className="editLinksAndUserContainer">
+            <div className="editLinksAndUserContainerLinks">
                 <MobileView />
                 <div className="linkListMainContainer">
                     <div className="linkListHeaderContainer">
@@ -108,6 +108,7 @@ const LinkList = () => {
                             </div>
                         </SortableContext>
                     </DndContext>
+                    <div className="linkListSpacer"></div>
                     <div className="linkListControlsContainer">
                         <button className="linkListCancelButton" onClick={handleCancel}>Cancel</button>
                         <button className="linkListSaveButton" onClick={handleSave}>Save</button>

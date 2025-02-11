@@ -6,6 +6,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import LinkItem from './LinkItem.jsx';
 import StatusMessage from './StatusMessage.jsx';
 import MobileView from '../general/MobileView.jsx';
+import './linkList.css';
 
 const LinkList = () => {
     const dispatch = useDispatch();

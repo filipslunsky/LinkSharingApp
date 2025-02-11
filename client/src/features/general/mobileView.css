@@ -26,9 +26,10 @@
 } 
 
 .mobileViewProfilePicture {
-    max-width: 87px;
-    max-height: 87px;
+    width: 87px;
+    height: 87px;
     border-radius: 45px;
+    object-fit: cover;
 }
 
 .mobileViewUserName {

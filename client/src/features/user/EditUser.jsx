@@ -5,11 +5,14 @@ import { editUserInfo, editUserPassword, uploadProfilePicture, deleteUser, logou
 import { setStatusMessage } from "../links/state/slice.js";
 import StatusMessage from "../links/StatusMessage.jsx";
 import MobileView from '../general/MobileView.jsx';
+import editPhotoIcon from '../../assets/img/icon-upload-image.svg';
 import './editUser.css';
 
 const EditUser = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
     const user = useSelector(state => state.user.user);
     const editInfoStatus = useSelector(state => state.user.editInfoStatus);
@@ -130,8 +133,21 @@ const EditUser = () => {
                     </div>
                     <div className="editUserEditPictureContainer">
                         <span className="editUserEditPictureLable">Profile picture</span>
-                        <input type="file" className="editUserEditPictureInput" onChange={(e) => setProfilePicture(e.target.files[0])} />
-                        <span className="editUserEditPictureDescription"></span>
+                        <label className="editUserUploadLabel">
+                            <input 
+                                type="file" 
+                                className="editUserEditPictureInput" 
+                                onChange={(e) => setProfilePicture(e.target.files[0])} 
+                            />
+                            <img src={editPhotoIcon} alt="upload icon" className="editUserUploadIcon" />
+                        </label>
+
+                        {user.profilePicture && (
+                            <img src={`${BASE_URL}${user.profilePicture}`} alt="profile picture" className="editUserProfilePicture" />
+                        )}
+                        <span className="editUserEditPictureDescription">
+                            Image must be a square below 1024x1024px. Use PNG, JPG, or JPEG format.
+                        </span>
                     </div>
                     <div className="editUserEditInfoContainer">
                         <div className="editUserEditInfoItemContainer">
@@ -163,8 +179,8 @@ const EditUser = () => {
                                 <div className="editUserEditInfoItemContainer">
                                     <span className="editUserEditInfoItemLable">New password confirm</span>
                                     <input className="editUserEditInfoItemInput" type="password" ref={newPasswordConfirmRef} onChange={checkPasswords} />
-                                    {!passwordMatch ? <span className="editUserPasswordWarning">Passwords don't match</span> : <span className="editUserPasswordsCorrect">Passwords match.</span>}
                                 </div>
+                                {!passwordMatch ? <span className="editUserPasswordWarning">Passwords don't match</span> : <span className="editUserPasswordsCorrect">Passwords match.</span>}
                                 <div className="userEditPasswordControlsContainer">
                                     <button className="userEditPaswordConfirmButton" onClick={handleEditPassword}>Update</button>
                                     <button className="userEditPaswordCancelButton" onClick={() => {setEditPassword(false)}}>Cancel</button>
@@ -190,7 +206,7 @@ const EditUser = () => {
                         deleteAccount
                         &&
                         <div className="leaveContainer">
-                            <span className="editUserConfirmQuestion">You are about to delete your account, this action is not reversible. Are you sure you want to proceed?</span>
+                            <span className="editUserConfirmQuestion">This action is not reversible. Are you sure?</span>
                             <button className="editUserConfirmYes" onClick={handleDelete}>Yes</button>
                             <button className="editUserConfirmNo" onClick={() => {setDeleteAccount(false)}}>No</button>
                         </div>

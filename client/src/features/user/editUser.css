@@ -4,3 +4,246 @@
     display: flex;
     margin-top: 15px;
 }
+
+.editUserMainContainer {
+    background-color: white;
+    height: 98%;
+    width: 57%;
+    margin-right: 1%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editUserHeaderContainer {
+    width: 92%;
+    padding: 20px 0;
+    margin-bottom: 5px;
+}
+
+.editUserHeader {
+    font-family: 'InstrumentSans-Bold';
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+.editUserDescription {
+    color: gray;
+    font-size: 14px;
+}
+
+.editUserEditPictureContainer {
+    width: 92%;
+    height: 180px;
+    background-color: #efecec;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.editUserEditPictureInput {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.editUserUploadLabel {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.editUserUploadIcon {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    z-index: 2;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.editUserUploadLabel:hover .editUserUploadIcon {
+    opacity: 1;
+}
+
+.editUserProfilePicture {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    position: absolute;
+    left: 39%;
+}
+
+.editUserEditPictureDescription {
+    display: inline-block;
+    width: 23%;
+    font-size: 9px;
+    color: gray;
+}
+
+.editUserEditInfoContainer {
+    width: 92%;
+    margin: 8px 0;
+    background-color: #efecec;
+    border-radius: 10px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.editUserEditInfoItemContainer {
+    width: 94%;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+}
+
+.editUserEditInfoItemLable {
+    font-size: 14px;
+    color: gray;
+}
+
+.editUserEditInfoItemInput {
+    width: 200px;
+    height: 22px;
+    border-radius: 7px;
+    border: 1px solid gray;
+    padding-left: 10px;
+}
+
+.editUserEditInfoItemInput:focus {
+    outline: 1px solid #633CFF;
+}
+
+.editUserEditPasswordButton {
+    border: none;
+    cursor: pointer;
+    height: 22px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    width: 150px;
+    margin-left: 33%;
+}
+
+.editUserEditPasswordButton:hover {
+    font-weight: bold;
+}
+
+.userEditPasswordContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    position: relative;
+    left: 2.9%;
+}
+
+.editUserPasswordWarning {
+    font-size: 12px;
+    color: gray;
+}
+
+.userEditPasswordControlsContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.userEditPaswordConfirmButton, .userEditPaswordCancelButton {
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.userEditPaswordCancelButton {
+    color: gray;
+}
+
+.userEditPaswordConfirmButton:hover, .userEditPaswordCancelButton:hover {
+    font-weight: bold;
+}
+
+.userEditButtonContainer {
+    width: 92%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userEditSaveButton, .editUserLogoutButton, .editUserDeleteButton {
+    height: 35px;
+    border: none;
+    border-radius: 7px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.userEditSaveButton:hover, .editUserLogoutButton:hover, .editUserDeleteButton:hover {
+    border: 1px solid black;
+}
+
+.userEditSaveButton {
+    background-color: #633CFF;
+}
+
+.editUserLogoutButton {
+    background-color: #7a750c;
+}
+
+.editUserDeleteButton {
+    background-color: rgb(146, 21, 21);
+}
+
+.leaveContainer {
+    width: 40%;
+}
+
+.editUserConfirmQuestion {
+    color: rgb(146, 21, 21);
+    font-size: 13px;
+    display: block;
+}
+
+.editUserConfirmYes, .editUserConfirmNo {
+    width: 35px;
+    border: none;
+    height: 25px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 3px;
+}
+
+.editUserConfirmYes {
+    margin-left: 60px;
+    background-color: rgb(146, 21, 21);
+}
+
+.editUserConfirmNo {
+    margin-left: 10px;
+    background-color: #7a750c;
+}
+
+.editUserConfirmYes:hover, .editUserConfirmNo:hover {
+    border: 1px solid black;
+}

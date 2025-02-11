@@ -1,5 +1,6 @@
 import appLogoLarge from '../../assets/img/logo-devlinks-large.svg';
 import appLogoSmall from '../../assets/img/logo-devlinks-small.svg';
+import './logo.css';
 
 const Logo = () => {
     return (

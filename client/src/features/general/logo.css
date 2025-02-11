@@ -1,0 +1,13 @@
+.logoMainContainer {
+    margin-left: 7%;
+    width: 200px;
+    height: 100%;
+}
+
+.logoImageLarge {
+    height: 90%;
+}
+
+.logoImageSmall {
+    display: none;
+}

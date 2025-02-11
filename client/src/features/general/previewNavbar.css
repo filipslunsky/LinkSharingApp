@@ -1,0 +1,47 @@
+.previewNavbarBackContainer {
+    width: 100%;
+    height: 300px;
+    background-color: #633CFF;
+    border-radius: 0 0 40px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.previewNavbarMainContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 12px;
+    width: 94%;
+    margin-top: 10px;
+}
+
+.previewNavbarLink {
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 25px;
+    border: 1px solid #737373;
+    border-radius: 12px;
+}
+
+.previewNavbarLink:hover {
+    border: 1px solid #633CFF;
+}
+
+.previewNavbarButton {
+    font-size: 18px;
+    background-color: #633CFF;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.previewNavbarButton:hover {
+    box-shadow: 1px 1px 1px #737373;
+}

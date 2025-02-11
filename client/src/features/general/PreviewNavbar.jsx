@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import './previewNavbar.css';
 
 const PreviewNavbar = () => {
     const BASE_URL = `${import.meta.env.VITE_API_URL}`;
@@ -18,10 +19,13 @@ const PreviewNavbar = () => {
     };
     return (
         <>
-            <div className="navbarMainContainer">
-                <Link to={'/links'}>Back to Editor</Link>
-                <button className="navbarShareButton" onClick={handleCopy}>Share</button>
+            <div className="previewNavbarBackContainer">
+                <div className="previewNavbarMainContainer">
+                    <Link className="previewNavbarLink" to={'/links'}>Back to Editor</Link>
+                    <button className="previewNavbarButton" onClick={handleCopy}>Share</button>
+                </div>
             </div>
+            
         </>
     );
 }

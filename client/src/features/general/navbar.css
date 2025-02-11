@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: center;
     height: 80px;
+    font-family: 'InstrumentSans-SemiBold';
 }
 
 .navbarLeftContainer {
@@ -62,7 +63,7 @@
 }
 
 .navbarItemName {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .navbarRightContainer img {

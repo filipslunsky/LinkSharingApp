@@ -18,14 +18,16 @@
     border-radius: 12px;
     width: 94%;
     margin-top: 10px;
+    font-family: 'InstrumentSans-Bold';
 }
 
 .previewNavbarLink {
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
     padding: 10px 25px;
     border: 1px solid #737373;
     border-radius: 12px;
+    color: #633CFF;
 }
 
 .previewNavbarLink:hover {
@@ -33,13 +35,14 @@
 }
 
 .previewNavbarButton {
-    font-size: 18px;
+    font-size: 16px;
     background-color: #633CFF;
     color: white;
     border: none;
     padding: 10px 25px;
     border-radius: 12px;
     cursor: pointer;
+    font-family: 'InstrumentSans-SemiBold';
 }
 
 .previewNavbarButton:hover {

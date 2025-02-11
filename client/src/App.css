@@ -3,7 +3,24 @@
   padding: 0px;
 }
 
+
+@font-face {
+  font-family: 'InstrumentSans-Regular';
+  src: url('./assets/fonts/static/InstrumentSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'InstrumentSans-SemiBold';
+  src: url('./assets/fonts/static/InstrumentSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'InstrumentSans-Bold';
+  src: url('./assets/fonts/static/InstrumentSans-Bold.ttf') format('truetype');
+}
+
 #root {
   margin: 0px;
   padding: 0px;
+  font-family: 'InstrumentSans-Regular';
 }

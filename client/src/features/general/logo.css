@@ -5,9 +5,25 @@
 }
 
 .logoImageLarge {
-    height: 90%;
+    height: 85%;
 }
 
 .logoImageSmall {
     display: none;
+}
+
+/* tablet size devices*/
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+
+/* mobile size devices*/
+@media (max-width: 767px) {
+    .logoImageLarge {
+        display: none;
+    }
+    
+    .logoImageSmall {
+        display: block;
+        height: 100%;
+    }
 }

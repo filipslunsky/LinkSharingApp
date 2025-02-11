@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPublicInfo } from "../user/state/slice";
+import StatusMessage from "./StatusMessage";
 import nextIcon from '../../assets/img/icon-arrow-right.svg';
 import CodePen from '../../assets/img/icon-codepen.svg';
 import CodeWars from '../../assets/img/icon-codewars.svg';
@@ -26,6 +27,7 @@ const Preview = () => {
     const publicUser = useSelector(state => state.user.publicUser);
     const publicLinks = useSelector(state => state.user.publicLinks);
     const publicInfoStatus = useSelector(state => state.user.publicInfoStatus);
+    const statusMessage = useSelector(state => state.links.statusMessage);
 
     const icons = {
         "CodePen": CodePen,
@@ -48,10 +50,10 @@ const Preview = () => {
         dispatch(getPublicInfo(hashId));
     }, [dispatch]);
 
-    useEffect(() => {
-        console.log(publicUser);
-        console.log(publicLinks);
-    }, [publicInfoStatus]);
+    // useEffect(() => {
+    //     console.log(publicUser);
+    //     console.log(publicLinks);
+    // }, [publicInfoStatus]);
 
     if (publicInfoStatus !== 'success') {
         return (
@@ -61,6 +63,7 @@ const Preview = () => {
 
     return (
         <>
+            {statusMessage.visible && <StatusMessage text={statusMessage.text} style={statusMessage.style} />}
             <div className="previewMainContainer">
                 <div className="previewUserContainer">
                     <img src={`${BASE_URL}${publicUser.profilePicture}`} alt="user picture" className="previewProfilePicture" />

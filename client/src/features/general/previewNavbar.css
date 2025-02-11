@@ -48,3 +48,38 @@
 .previewNavbarButton:hover {
     box-shadow: 1px 1px 1px #737373;
 }
+
+/* tablet size devices*/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .previewNavbarMainContainer {
+        height: 20px;
+    }
+
+    .previewNavbarLink {
+        font-size: 15px;
+    }
+
+    .previewNavbarButton {
+        font-size: 15px;
+    }
+}
+
+/* mobile size devices*/
+@media (max-width: 767px) {
+    .previewNavbarBackContainer {
+        background-color: white;
+        height: 80px;
+    }
+
+    .previewNavbarMainContainer {
+        height: 20px;
+    }
+
+    .previewNavbarLink {
+        font-size: 14px;
+    }
+
+    .previewNavbarButton {
+        font-size: 14px;
+    }
+}

@@ -4,6 +4,9 @@
     align-items: center;
     height: 80px;
     font-family: 'InstrumentSans-SemiBold';
+    background-color: white;
+    width: 98%;
+    margin-top: 10px;
 }
 
 .navbarLeftContainer {

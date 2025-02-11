@@ -247,3 +247,78 @@
 .editUserConfirmYes:hover, .editUserConfirmNo:hover {
     border: 1px solid black;
 }
+
+/* tablet size devices*/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .editUserMainContainer {
+        width: 98%;
+        margin-left: 1%;
+    }
+}
+
+/* mobile size devices*/
+@media (max-width: 767px) {
+    .editLinksAndUserContainer {
+        height: 140vh;
+    }
+
+    .editUserMainContainer {
+        width: 98%;
+        margin-left: 1%;
+    }
+
+    .editUserEditPictureContainer {
+        flex-direction: column;
+        height: 300px;
+        align-items: flex-start;
+    }
+
+    .editUserEditPictureLable {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .editUserProfilePicture {
+        left: 3%;
+    }
+
+    .editUserUploadIcon {
+        left: 100%;
+    }
+
+    .editUserEditPictureDescription {
+        width: 50%;
+        margin-left: 20px;
+    }
+
+    .editUserEditInfoContainer {
+        height: 370px;
+    }
+
+    .editUserEditInfoItemContainer {
+        flex-direction: column;
+        height: 45px;
+        align-items: self-start;
+    }
+
+    .editUserEditInfoItemInput {
+        width: 94%;
+    }
+
+    .userEditButtonContainer {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+        height: 180px;
+    }
+
+    .leaveContainer {
+        width: 90%;
+        place-items: center;
+        text-align: center;
+    }
+    
+    .editUserConfirmYes {
+        margin-left: 30px;
+    }
+}

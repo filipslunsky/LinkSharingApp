@@ -29,10 +29,10 @@ const LinkItem = ({display_order, title, url, index}) => {
 
     return (
         <>
-            <div className="linkItemMainContainer" ref={setNodeRef} {...attributes} {...listeners}>
+            <div className="linkItemMainContainer" ref={setNodeRef} {...attributes}>
                 <div className="linkItemHeaderContainer">
                     <div className="linkItemHeaderLeftContainer">
-                        <img className='linkItemDragNDropImage' src={dragNDropIcon} alt="drag and drop" />
+                        <img className='linkItemDragNDropImage' src={dragNDropIcon} alt="drag and drop" {...listeners}/>
                         <span className="linkItemTitle">Link #{display_order}</span>
                     </div>
                     <button className='linkItemRemoveButton' onClick={handleDeleteLink}>Remove</button>

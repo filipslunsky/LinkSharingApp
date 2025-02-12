@@ -1,0 +1,33 @@
+.statusMessageMainContainer {
+    background-color: black;
+    height: 35px;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 130px;
+    z-index: 6;
+    border-radius: 10px;
+    opacity: 80%;
+}
+
+.statusMessageText {
+    color: white;
+    text-align: center;
+    font-size: 15px;
+}
+
+/* tablet size devices*/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .statusMessageMainContainer {
+        width: 60%;
+    }
+}
+
+/* mobile size devices*/
+@media (max-width: 767px) {
+    .statusMessageMainContainer {
+        width: 80%;
+    }
+}

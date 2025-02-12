@@ -1,3 +1,5 @@
+import './statusMessage.css';
+
 const StatusMessage = ({text, style}) => {
 
     return (

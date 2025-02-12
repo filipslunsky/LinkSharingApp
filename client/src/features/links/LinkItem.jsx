@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { updateLink, deleteLink } from './state/slice.js';
 import dragNDropIcon from '../../assets/img/icon-drag-and-drop.svg';
 import './linkItem.css';
@@ -12,7 +13,14 @@ const LinkItem = ({display_order, title, url, index}) => {
     const urlRef = useRef();
     const platformRef = useRef();
 
-    const { attributes, listeners, setNodeRef } = useSortable({ id: display_order });
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: display_order });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+        boxShadow: isDragging ? "0px 4px 10px rgba(0, 0, 0, 0.2)" : "none",
+    };
 
     const handleUpdateLink = () => {
         const updatedLink = {
@@ -29,7 +37,7 @@ const LinkItem = ({display_order, title, url, index}) => {
 
     return (
         <>
-            <div className="linkItemMainContainer" ref={setNodeRef} {...attributes}>
+            <div className={`linkItemMainContainer ${isDragging ? 'dragging' : ''}`} ref={setNodeRef} {...attributes} style={style}>
                 <div className="linkItemHeaderContainer">
                     <div className="linkItemHeaderLeftContainer">
                         <img className='linkItemDragNDropImage' src={dragNDropIcon} alt="drag and drop" {...listeners}/>

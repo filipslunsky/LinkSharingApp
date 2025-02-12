@@ -3,20 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useSortable } from "@dnd-kit/sortable";
 import { updateLink, deleteLink } from './state/slice.js';
 import dragNDropIcon from '../../assets/img/icon-drag-and-drop.svg';
-import CodePen from '../../assets/img/icon-codepen.svg';
-import CodeWars from '../../assets/img/icon-codewars.svg';
-import DevTo from '../../assets/img/icon-devto.svg';
-import Facebook from '../../assets/img/icon-facebook.svg';
-import FreeCodeMap from '../../assets/img/icon-freecodecamp.svg';
-import GitHub from '../../assets/img/icon-github.svg';
-import GitLab from '../../assets/img/icon-gitlab.svg';
-import HashNode from '../../assets/img/icon-hashnode.svg';
-import LinkedIn from '../../assets/img/icon-linkedin.svg';
-import StackOverflow from '../../assets/img/icon-stack-overflow.svg';
-import Twitch from '../../assets/img/icon-twitch.svg';
-import Twitter from '../../assets/img/icon-twitter.svg';
-import YouTube from '../../assets/img/icon-youtube.svg';
-import PortfolioWeb from '../../assets/img/icon-profile-details-header.svg';
 import './linkItem.css';
 
 const LinkItem = ({display_order, title, url, index}) => {

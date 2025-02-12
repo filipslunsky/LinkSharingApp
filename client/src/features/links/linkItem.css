@@ -1,28 +1,62 @@
-/* .linkItemInputField {
-    appearance: none;
-    background-repeat: no-repeat;
-    background-position: left 10px center;
-    background-size: 20px;
-    padding-left: 35px;
-    height: 40px;
+.linkItemMainContainer {
+    background-color: #efecec;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
-.linkItemInputField[value="Facebook"] {
-    background-image: url('../../assets/img/icon-facebook.svg');
+.linkItemHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 94%;
+    margin-left: 3%;
 }
 
-.linkItemInputField[value="LinkedIn"] {
-    background-image: url('../../assets/img/icon-linkedin.svg');
+.linkItemHeaderLeftContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    font-size: 13px;
 }
 
-.linkItemInputField[value="GitHub"] {
-    background-image: url('../../assets/img/icon-github.svg');
+.linkItemDragNDropImage {
+    cursor: pointer;
 }
 
-.linkItemInputField[value="YouTube"] {
-    background-image: url('../../assets/img/icon-youtube.svg');
+.linkItemRemoveButton {
+    background-color: inherit;
+    border: none;
+    margin-top: 8px;
+    cursor: pointer;
 }
 
-.linkItemInputField[value="PortfolioWeb"] {
-    background-image: url('../../assets/img/icon-profile-details-header.svg');
-} */
+.linkItemRemoveButton:hover {
+    font-weight: bold;
+}
+
+.linkItemBodyContainer {
+    width: 94%;
+    margin-left: 3%;
+}
+
+.linkItemInputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.linkItemInputLable {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.linkItemInputField {
+    height: 25px;
+    padding-left: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.linkItemInputField:focus {
+    outline: none;
+}

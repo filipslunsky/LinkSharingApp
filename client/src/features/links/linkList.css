@@ -42,6 +42,9 @@
     border-radius: 5px;
     cursor: pointer;
     color: #633CFF;
+    margin-bottom: 10px;
+    width: 98%;
+    margin-left: 1%;
 }
 
 .linkListAddButton:hover {
@@ -110,6 +113,11 @@
         margin-left: 1%;
     }
 
+    .linkListAddButton {
+        width: 99%;
+        margin-left: 2%;
+    }
+
 }
 
 /* mobile size devices*/
@@ -122,6 +130,15 @@
         width: 98%;
         margin-left: 1%;
         height: 100%;
+    }
+
+    .linkListDescription {
+        font-size: 11px;
+    }
+
+    .linkListAddButton {
+        width: 98%;
+        margin-left: 0;
     }
 
     .linkListItemsContainer {

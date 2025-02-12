@@ -80,7 +80,7 @@ const Preview = () => {
                                         <img src={icons[item.title] || PortfolioWeb} alt="link icon" className="previewLinkIcon" />
                                         <span className="previewLinkItemName">{item.title}</span>
                                     </div>
-                                    <a className="previewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">
+                                    <a className="previewLinkItemNextUrl" href={`${item.url}`} target="_blank">
                                         <img src={nextIcon} alt="link icon" className="previewNextIcon" />
                                     </a>
                                 </div>

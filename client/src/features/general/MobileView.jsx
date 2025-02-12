@@ -56,7 +56,7 @@ const MobileView = () => {
                                 <div className={`mobileViewLinkItem ${item.title}`} key={item.display_order}>
                                     <img src={icons[item.title] || PortfolioWeb} alt="link icon" className="mobileViewLinkIcon" />
                                     <span className="mobileViewLinkItemName">{item.title}</span>
-                                    <a className="mobileViewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">
+                                    <a className="mobileViewLinkItemNextUrl" href={`${item.url}`} target="_blank">
                                         <img src={nextIcon} alt="link icon" className="mobileViewNextIcon" />
                                     </a>
                                 </div>

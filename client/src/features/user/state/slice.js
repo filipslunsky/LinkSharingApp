@@ -180,6 +180,8 @@ const userSlice = createSlice({
             state.logMessage = null;
             localStorage.removeItem('user');
             localStorage.removeItem('token');
+            state.links = [];
+            state.currentLinks = [];
         },
         resetRegisterStatus: (state) => {
             state.registerStatus = '';

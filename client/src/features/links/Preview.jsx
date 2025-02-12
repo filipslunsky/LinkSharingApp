@@ -18,6 +18,7 @@ import Twitch from '../../assets/img/icon-twitch.svg';
 import Twitter from '../../assets/img/icon-twitter.svg';
 import YouTube from '../../assets/img/icon-youtube.svg';
 import PortfolioWeb from '../../assets/img/icon-profile-details-header.svg';
+import './preview.css';
 
 const Preview = () => {
     const BASE_URL = `${import.meta.env.VITE_API_URL}`;
@@ -74,9 +75,11 @@ const Preview = () => {
                     {
                         publicLinks.map(item => {
                             return (
-                                <div className="previewLinkItem" key={item.display_order}>
-                                    <img src={icons[item.title] || PortfolioWeb} alt="link icon" className="previewLinkIcon" />
-                                    <span className="previewLinkItemName">{item.title}</span>
+                                <div className={`previewLinkItem ${item.title}`} key={item.display_order}>
+                                    <div className="previewLinkLeftContainer">
+                                        <img src={icons[item.title] || PortfolioWeb} alt="link icon" className="previewLinkIcon" />
+                                        <span className="previewLinkItemName">{item.title}</span>
+                                    </div>
                                     <a className="previewLinkItemNextUrl" href={`https://${item.url}`} target="_blank">
                                         <img src={nextIcon} alt="link icon" className="previewNextIcon" />
                                     </a>

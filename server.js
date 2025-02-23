@@ -12,6 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Ignore favicon requests to prevent UUID errors
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 app.use('/user', usersRouter);
 app.use('/links', linksRouter);
 
@@ -21,11 +24,12 @@ app.use('/uploads', (req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname, "client", "dist")));
+
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
-    console.log(`listening to port ${PORT}`);
+    console.log(`Listening on port ${PORT}`);
 });
